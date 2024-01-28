@@ -26,3 +26,5 @@ export HF_ENDPOINT=https://hf-mirror.com
 huggingface-cli download --resume-download vikhyatk/moondream1 --local-dir custom_nodes/Comfyui-image2prompt/model
 
 ```
+
+![image](workflow.jpg)
