@@ -9,7 +9,7 @@ class LoadImage2TextModel:
     def INPUT_TYPES(cls):
         return {
             "required": {
-                "device": (["cpu", "cuda"], {"default": "cpu"}),
+                "device": (["cpu", "cuda"], {"default": "cuda"}),
             }
         }
 
