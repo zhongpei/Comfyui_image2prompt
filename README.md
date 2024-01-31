@@ -1,6 +1,6 @@
 ![image](workflow.jpg)
 
-
+![image](internlm_workflow.png)
 
 ### 第1步：安装插件
 
