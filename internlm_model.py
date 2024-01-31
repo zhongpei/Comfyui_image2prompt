@@ -28,6 +28,7 @@ class InternlmVLModle():
         self.model_path, self.model, self.tokenizer = self.load_model(device=device, dtype=dtype)
         self.device = device
         self.dtype = dtype
+        self.name = "internlm"
 
 
 

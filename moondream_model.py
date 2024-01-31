@@ -1177,6 +1177,7 @@ class MoondreamModel():
         self.model_path, self.vision_encoder, self.text_model = self.load_model(device=device, dtype=dtype)
         self.device = device
         self.dtype = dtype
+        self.name = "moondream"
 
     def image2text(self, image, question):
         return self.answer_question(self.text_model, self.vision_encoder, image, question)
