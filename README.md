@@ -1,3 +1,5 @@
+![image](workflow.jpg)
+
 
 
 ### 第1步：安装插件
@@ -12,7 +14,7 @@ git clone https://github.com/zhongpei/Comfyui-image2prompt
 
 ### 第2步：下载模型
 
-首先，请从以下载 https://huggingface.co/vikhyatk/moondream1 到插件的model目录
+首先，请从以下载 https://huggingface.co/vikhyatk/moondream1 到插件的model/moondream1目录
 
 
 可以使用镜像，请在终端中执行以下命令：
@@ -21,11 +23,11 @@ git clone https://github.com/zhongpei/Comfyui-image2prompt
 ```
 
 export HF_ENDPOINT=https://hf-mirror.com
-huggingface-cli download --resume-download vikhyatk/moondream1 --local-dir custom_nodes/Comfyui-image2prompt/model
+huggingface-cli download --resume-download vikhyatk/moondream1 --local-dir custom_nodes/Comfyui-image2prompt/model/moondream1
 
 ```
 
-![image](workflow.jpg)
+
 
 ### Step 1: Install the Plugin
 
@@ -39,12 +41,12 @@ This step will enable you to utilize the plugin within the ComfyUI environment, 
 
 ### Step 2: Download the Model
 
-Before using the plugin, you need to download the required model. The plugin uses the `vikhyatk/moondream1` model from Hugging Face. Ensure that you have downloaded the model to the plugin's `model` directory from the following link:
+Before using the plugin, you need to download the required model. The plugin uses the `vikhyatk/moondream1` model from Hugging Face. Ensure that you have downloaded the model to the plugin's `model/moondream1` directory from the following link:
 
 [Model Download Link](https://huggingface.co/vikhyatk/moondream1)
 
 
 By following these steps, you will ensure that the plugin can correctly access and use the model, providing accurate image-to-prompt conversion services.
 
-![Workflow Diagram](workflow.jpg)
+
 

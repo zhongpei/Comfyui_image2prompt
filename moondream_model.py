@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 
+
 import torch
 from PIL import Image
 from einops import rearrange
@@ -1162,7 +1163,10 @@ import hashlib
 import os
 from .install import get_ext_dir
 
-class Image2TextModel():
+
+    
+
+class MoondreamModel():
     def __init__(self, device="cpu"):
         if torch.cuda.is_available() and device == "cuda":
             device = "cuda"
@@ -1179,7 +1183,7 @@ class Image2TextModel():
 
     @classmethod
     def load_model(cls, device="cpu", dtype=torch.float32):
-        local_dir = get_ext_dir("model")
+        local_dir = get_ext_dir("model/moondream1")
         model_path = snapshot_download("vikhyatk/moondream1", local_dir=local_dir)
 
         vision_encoder = VisionEncoder(model_path,device=device,dtype=dtype).to(device=device, dtype=dtype)
