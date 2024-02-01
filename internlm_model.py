@@ -5,7 +5,7 @@ from huggingface_hub import snapshot_download
 
 
 from .install import get_ext_dir
-
+from .utils import pil2tensor
 
 import time
 from PIL import Image, ImageFile
@@ -18,7 +18,7 @@ import torch
 
 
 class InternlmVLModle():
-    def __init__(self, device="cpu"):
+    def __init__(self, device="cpu", low_memory=False):
         if torch.cuda.is_available() and device == "cuda":
             device = "cuda"
             dtype = torch.float16
@@ -29,7 +29,8 @@ class InternlmVLModle():
         self.device = device
         self.dtype = dtype
         self.name = "internlm"
-
+        self.low_memory = low_memory
+        print(f"Model loaded on {device} with dtype {dtype} low_memory={low_memory}")
 
 
     @classmethod
@@ -68,10 +69,30 @@ class InternlmVLModle():
         temp_dir = tempfile.mkdtemp()
         image_path = os.path.join(temp_dir,"input.jpg")
         image.save(image_path)
+        #image = pil2tensor(image)
         if self.device == "cuda":
+            if self.low_memory:
+                self.model.half().cuda().eval()
             with torch.cuda.amp.autocast(): 
-                response, _ = self.model.chat(query=question, image=image_path, tokenizer= self.tokenizer,history=[], do_sample=False)
+                response, _ = self.model.chat(
+                        query=question, 
+                        image=image_path, 
+                        tokenizer= self.tokenizer,
+                        history=[], 
+                        do_sample=True
+                    )
+            if self.low_memory:
+                torch.cuda.empty_cache()
+                print(f"Memory usage: {torch.cuda.memory_allocated() / 1024 ** 3:.2f} GB")
+                self.model.to("cpu", dtype=torch.float32)
+                print(f"Memory usage: {torch.cuda.memory_allocated() / 1024 ** 3:.2f} GB")
         else:
-            response, _ = self.model.chat(query=question, image=image_path, tokenizer= self.tokenizer,history=[], do_sample=False)
+            response, _ = self.model.chat(
+                    query=question,
+                    image=image_path, 
+                    tokenizer= self.tokenizer,
+                    history=[], 
+                    do_sample=True
+                )
         print(response)
         return response

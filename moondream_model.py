@@ -1157,8 +1157,8 @@ class TextModel(nn.Module):
 
 
 from huggingface_hub import snapshot_download
-from threading import Thread
-from transformers import TextIteratorStreamer
+
+
 import hashlib
 import os
 from .install import get_ext_dir
@@ -1167,7 +1167,7 @@ from .install import get_ext_dir
     
 
 class MoondreamModel():
-    def __init__(self, device="cpu"):
+    def __init__(self, device="cpu", low_memory=False):
         if torch.cuda.is_available() and device == "cuda":
             device = "cuda"
             dtype = torch.float16
@@ -1178,6 +1178,7 @@ class MoondreamModel():
         self.device = device
         self.dtype = dtype
         self.name = "moondream"
+        self.low_memory = low_memory
 
     def image2text(self, image, question):
         return self.answer_question(self.text_model, self.vision_encoder, image, question)
@@ -1214,24 +1215,17 @@ class MoondreamModel():
             os.makedirs("image_encoder_cache", exist_ok=True)
             torch.save(image_vec, cache_path)
             return image_vec.to(device=self.device, dtype=self.dtype)
-
-
-    def answer_question(self, image, question):      
-        print("Encoding image...")
         
-        streamer = TextIteratorStreamer(self.text_model.tokenizer, skip_special_tokens=True)
-        generation_kwargs = dict(
-            image_embeds=self.cached_vision_encoder( image), 
-            question=question, 
-            streamer=streamer
-        )
-        thread = Thread(target=self.text_model.answer_question, kwargs=generation_kwargs)
-        thread.start()
+    def answer_question(self, image, question):    
+        if self.low_memory and self.device == "cuda":
+            
+            self.text_model = self.text_model.to("cuda", dtype=torch.float16) 
+        output = self.text_model.answer_question(self.cached_vision_encoder( image), question)
 
-        buffer = ""
-        output = ""
-        for new_text in streamer:
-            buffer += new_text
-            if len(buffer) > 1:
-                output = re.sub("<$", "", re.sub("END$", "", buffer))
-        return output.strip()
+        if self.low_memory and self.device == "cuda":
+            torch.cuda.empty_cache()
+            print(f"Memory usage: {torch.cuda.memory_allocated() / 1024 ** 3:.2f} GB")
+            self.text_model = self.text_model.to("cpu", dtype=torch.float32)
+            print(f"Memory usage: {torch.cuda.memory_allocated() / 1024 ** 3:.2f} GB")
+        return output
+   
