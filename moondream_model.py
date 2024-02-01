@@ -1185,7 +1185,11 @@ class MoondreamModel():
     @classmethod
     def load_model(cls, device="cpu", dtype=torch.float32):
         local_dir = get_ext_dir("model/moondream1")
-        model_path = snapshot_download("vikhyatk/moondream1", local_dir=local_dir)
+        if os.path.exists(local_dir):
+            model_path = local_dir
+        else:
+            model_path = snapshot_download("vikhyatk/moondream1", local_dir=local_dir)
+        #print(f"{local_dir} {model_path}")
 
         vision_encoder = VisionEncoder(model_path,device=device,dtype=dtype).to(device=device, dtype=dtype)
         text_model = TextModel(model_path).to(device=device, dtype=dtype)

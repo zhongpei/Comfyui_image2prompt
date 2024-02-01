@@ -2,7 +2,7 @@ from .image2text import Image2Text, LoadImage2TextModel
 from .install import check_and_install
 
 
-check_and_install("Pillow")
+check_and_install("Pillow","PIL")
 check_and_install("huggingface_hub")
 check_and_install("transformers")
 check_and_install("einops")

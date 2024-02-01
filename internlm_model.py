@@ -36,7 +36,10 @@ class InternlmVLModle():
     def load_model(cls, device, dtype):
         
         local_dir = get_ext_dir("model/internlm-xcomposer2-vl-7b")
-        model_path = snapshot_download("internlm/internlm-xcomposer2-vl-7b", local_dir=local_dir)
+        if os.path.exists(local_dir):
+            model_path = local_dir
+        else:
+            model_path = snapshot_download("internlm/internlm-xcomposer2-vl-7b", local_dir=local_dir)
         #model_path = "internlm/internlm-xcomposer2-vl-7b"
         tokenizer = AutoTokenizer.from_pretrained(model_path, trust_remote_code=True)
 
