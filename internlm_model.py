@@ -48,10 +48,10 @@ class InternlmVLModle():
             
             model = AutoModelForCausalLM.from_pretrained(
                 model_path, 
-                torch_dtype=dtype, 
+                torch_dtype="auto", 
                 trust_remote_code=True,
-                device_map="cuda"
-            ).half().cuda().eval()
+                device_map="auto"
+            ).eval()
 
         else:
             model = model.cpu().float().eval()
