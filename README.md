@@ -1,8 +1,8 @@
 ### 基础流程
-![image](workflow.jpg)
+![image](workflows/workflow.jpg)
 
 ### 使用图片和文字组合方式
-![image](custom_prompt.png)
+![image](workflows/custom_prompt.png)
 
 ### 第1步：安装插件
 
