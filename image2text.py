@@ -51,17 +51,30 @@ class Image2Text:
             }
         }
 
+    OUTPUT_IS_LIST = (True,)
     RETURN_TYPES = ("STRING",)
     FUNCTION = "get_value"
     CATEGORY = "fofo"
 
     def get_value(self, model, image, query, custom_query):
-        image = Image.fromarray(np.clip(255. * image[0].cpu().numpy(),0,255).astype(np.uint8))
-
+        # Ensure custom queries are prioritized
         if len(custom_query) > 0:
             query = custom_query
+        # Initialize the list of strings to return
+        answers = []
+        # Iterate over each batch of images
+        for img in image:
+            # Convert Tensor to image
+            img = Image.fromarray(
+                np.clip(255.0 * img.cpu().numpy(), 0, 255).astype(np.uint8)
+            )
+            # Additional processing for specific models
+            if model.name == "internlm":
+                query = f"<ImageHere>{query}"
 
-        if model.name == "internlm":
-            query = f"<ImageHere>{query}"
-        print(f"prompt: {query}")
-        return (model.answer_question(image,query),)
+            result = model.answer_question(img, query)
+            # Call the answer_question method for each batch of images and add to the answers list
+            answers.append(result)
+
+        # Return a list of strings, each corresponding to an answer for a batch
+        return (answers,)
