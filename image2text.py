@@ -10,7 +10,7 @@ class LoadImage2TextModel:
     def INPUT_TYPES(cls):
         return {
             "required": {
-                "model": (["moondream1", "internlm-xcomposer2-vl-7b", ], {"default": "vikhyatk/moondream1"}),
+                "model": (["moondream1", "internlm-xcomposer2-vl-7b", ], {"default": "moondream1"}),
                 "device": (["cpu", "cuda", ], {"default": "cuda"}),
                 "low_memory": ("BOOLEAN", {"default": False}),
             }
