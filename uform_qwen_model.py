@@ -28,19 +28,20 @@ class UformQwenModel():
         else:
             model_path = snapshot_download(repo, local_dir=local_dir)
 
+        
+
+
+
         self.processor = AutoProcessor.from_pretrained(model_path, trust_remote_code=True)
-
-
-
-
         if torch.cuda.is_available() and device == "cuda":
             self.model = AutoModel.from_pretrained(                
                 model_path, 
-                torch_dtype=torch.float16, 
+                torch_dtype="auto", 
                 trust_remote_code=True,                
                 device_map="auto",
                 max_length=1024,
             ).to(device).eval()
+
             
         else:
             self.model = AutoModel.from_pretrained(                
@@ -49,6 +50,7 @@ class UformQwenModel():
                 trust_remote_code=True,
                 max_length=1024,
             ).to(device).float().eval()
+            
         
 
     def answer_question(self, image, question):     
