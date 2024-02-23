@@ -1,5 +1,6 @@
 from .moondream_model import MoondreamModel
 from .internlm_model import InternlmVLModle
+from .uform_qwen_model import UformQwenModel
 from PIL import Image
 import numpy as np
 
@@ -10,7 +11,7 @@ class LoadImage2TextModel:
     def INPUT_TYPES(cls):
         return {
             "required": {
-                "model": (["moondream1", "internlm-xcomposer2-vl-7b", ], {"default": "moondream1"}),
+                "model": (["moondream1", "internlm-xcomposer2-vl-7b", "uform-qwen"], {"default": "moondream1"}),
                 "device": (["cpu", "cuda", ], {"default": "cuda"}),
                 "low_memory": ("BOOLEAN", {"default": False}),
             }
@@ -25,6 +26,8 @@ class LoadImage2TextModel:
             
         if model == 'internlm-xcomposer2-vl-7b':
             return (InternlmVLModle(device=device,low_memory=low_memory),)
+        elif model == 'uform-qwen':
+            return (UformQwenModel(device=device,low_memory=low_memory),)
         
         return (MoondreamModel(device=device,low_memory=low_memory),)
     

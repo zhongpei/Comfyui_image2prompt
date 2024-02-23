@@ -41,20 +41,24 @@ class InternlmVLModle():
             model_path = local_dir
         else:
             model_path = snapshot_download("internlm/internlm-xcomposer2-vl-7b", local_dir=local_dir)
-        #model_path = "internlm/internlm-xcomposer2-vl-7b"
+        
         tokenizer = AutoTokenizer.from_pretrained(model_path, trust_remote_code=True)
 
-        if torch.cuda.is_available() and device == "cuda":
-            
+        if torch.cuda.is_available() and device == "cuda":    
+            model = AutoModelForCausalLM.from_pretrained(
+                model_path, 
+                torch_dtype=torch.float16, 
+                trust_remote_code=True,                
+                device_map="auto",
+                max_length=1024,
+            ).to(device).eval()
+        else:
             model = AutoModelForCausalLM.from_pretrained(
                 model_path, 
                 torch_dtype="auto", 
-                trust_remote_code=True,
-                device_map="auto"
-            ).eval()
-
-        else:
-            model = model.cpu().float().eval()
+                trust_remote_code=True,                
+                max_length=1024,
+            ).to(device).float().eval()
         # `torch_dtype=torch.float16` 可以令模型以 float16 精度加载，否则 transformers 会将模型加载为 float32，导致显存不足
         
         model.tokenizer = tokenizer
