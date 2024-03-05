@@ -2,7 +2,7 @@ from .image2text import Image2Text, LoadImage2TextModel
 from .install import check_and_install, check_and_install_version
 
 
-check_and_install_version("Pillow","10.1.0")
+check_and_install_version("Pillow","10.1.0",import_name="PIL")
 
 check_and_install_version("huggingface_hub","0.20.1")
 check_and_install_version("transformers","4.36.2")
