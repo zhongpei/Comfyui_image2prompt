@@ -2,8 +2,11 @@ from .moondream_model import MoondreamModel
 from .moodream2_model import Moodream2Model
 from .internlm_model import InternlmVLModle
 from .uform_qwen_model import UformQwenModel
+from .wd_v3_model import WdV3Model
 from PIL import Image
 import numpy as np
+
+GLOBAL_WdV3Model = None
 
 class LoadImage2TextModel:
     def __init__(self):
@@ -12,7 +15,7 @@ class LoadImage2TextModel:
     def INPUT_TYPES(cls):
         return {
             "required": {
-                "model": (["moondream1","moondream2", "internlm-xcomposer2-vl-7b", "uform-qwen"], {"default": "moondream1"}),
+                "model": (["moondream1","moondream2", "internlm-xcomposer2-vl-7b", "uform-qwen","wd-swinv2-tagger-v3"], {"default": "moondream1"}),
                 "device": (["cpu", "cuda", ], {"default": "cuda"}),
                 "low_memory": ("BOOLEAN", {"default": False}),
             }
@@ -31,6 +34,8 @@ class LoadImage2TextModel:
             return (UformQwenModel(device=device,low_memory=low_memory),)
         elif model == "moondream2":
             return (Moodream2Model(device=device,low_memory=low_memory),)
+        elif model == "wd-swinv2-tagger-v3":
+            return (WdV3Model(device=device,low_memory=low_memory),)
         
         return (MoondreamModel(device=device,low_memory=low_memory),)
     
@@ -84,3 +89,37 @@ class Image2Text:
 
         # Return a list of strings, each corresponding to an answer for a batch
         return (answers,)
+
+class Image2TextWithTags:
+    @classmethod
+    def INPUT_TYPES(cls):
+        result = Image2Text.INPUT_TYPES()
+        result["required"].update(
+            {
+                "score": ("BOOLEAN", {
+                    "default": False,
+                    
+                })
+            },
+        ) 
+        return result
+    
+    OUTPUT_IS_LIST = (True,)
+    RETURN_TYPES = ("STRING", )
+    RETURN_NAMES = ('FULL PROMPT', )
+    FUNCTION = "get_value"
+    CATEGORY = "fofo"
+
+    def get_value(self, model, image, query, custom_query, score):
+        global GLOBAL_WdV3Model
+        if GLOBAL_WdV3Model is None:
+            GLOBAL_WdV3Model=WdV3Model(device="cpu",low_memory=False)
+
+        result1 =  Image2Text().get_value(model, image, query, custom_query)
+        result2 =  Image2Text().get_value(GLOBAL_WdV3Model, image, query,"score" if score is True else "")
+
+        output = []
+        for r1 in result1[0]:
+            for r2 in result2[0]:
+                output.append(f"{r1}\n\n{r2}")
+        return (output,)
