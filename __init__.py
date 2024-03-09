@@ -1,4 +1,4 @@
-from .image2text import Image2Text, LoadImage2TextModel
+from .image2text import Image2Text, LoadImage2TextModel, Image2TextWithTags
 from .install import check_and_install, check_and_install_version
 
 
@@ -14,6 +14,7 @@ check_and_install_version("timm","0.9.12")
 NODE_CLASS_MAPPINGS = {
     "Image2Text": Image2Text,
     "LoadImage2TextModel": LoadImage2TextModel,
+    "Image2TextWithTags": Image2TextWithTags,
 
 }
 
@@ -21,4 +22,5 @@ NODE_CLASS_MAPPINGS = {
 NODE_DISPLAY_NAME_MAPPINGS = {
     "Image2Text": "Image to Text",
     "LoadImage2TextModel": "Loader Image to Text Model",
+    "Image2TextWithTags":"Image to Text with Tags",
 }
