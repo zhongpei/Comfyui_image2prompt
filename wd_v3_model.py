@@ -5,9 +5,8 @@ from transformers import (
 import torch
 
 import os
-import os
-import torch
 
+import re
 from huggingface_hub import snapshot_download
 
 
@@ -15,7 +14,7 @@ from .install import get_ext_dir
 from .utils import pil2tensor,is_bf16_supported
 
 
-import torch
+
 
 
 
@@ -53,9 +52,18 @@ class WdV3Model():
             
         
 
-    def answer_question(self, image, question):     
-        
+    def answer_question(self, image, question,):     
 
+        def extract_threshold(text):
+            # 使用正则表达式匹配模式
+            match = re.search(r'threshold\s*=\s*([0-9]*\.?[0-9]+)', text)
+            if match:
+                return float(match.group(1))  # 返回匹配的数字部分
+            else:
+                return 0.35  # 如果没有找到匹配项，则返回None
+            
+        threshold=extract_threshold(question)
+        print(f"threshold:{threshold}")
         inputs = self.processor.preprocess(image, return_tensors="pt")
 
         with torch.no_grad():
@@ -65,7 +73,7 @@ class WdV3Model():
         # get probabilities
         results = {self.model.config.id2label[i]: logit.float() for i, logit in enumerate(logits)}
         results = {
-            k: v for k, v in sorted(results.items(), key=lambda item: item[1], reverse=True) if v > 0.35 # 35% threshold
+            k: v for k, v in sorted(results.items(), key=lambda item: item[1], reverse=True) if v > threshold # 35% threshold
         }
 
         if "score" in question:

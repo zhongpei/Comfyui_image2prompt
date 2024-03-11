@@ -2,8 +2,7 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 import torch
 
 import os
-import os
-import torch
+
 
 from huggingface_hub import snapshot_download
 import re
@@ -12,7 +11,6 @@ from .install import get_ext_dir
 from .utils import pil2tensor, is_bf16_supported
 
 
-import torch
 
 
 

@@ -5,6 +5,7 @@ from .uform_qwen_model import UformQwenModel
 from .wd_v3_model import WdV3Model
 from PIL import Image
 import numpy as np
+from .utils import remove_specific_patterns
 
 GLOBAL_WdV3Model = None
 
@@ -59,6 +60,10 @@ class Image2Text:
                     "default": "",
                     "multiline": True,
                 }),
+                "print_log": ("BOOLEAN", {
+                    "default": False,
+                    
+                }),
             }
         }
 
@@ -67,7 +72,7 @@ class Image2Text:
     FUNCTION = "get_value"
     CATEGORY = "fofo"
 
-    def get_value(self, model, image, query, custom_query):
+    def get_value(self, model, image, query, custom_query, print_log):
         # Ensure custom queries are prioritized
         if len(custom_query) > 0:
             query = custom_query
@@ -84,6 +89,8 @@ class Image2Text:
                 query = f"<ImageHere>{query}"
 
             result = model.answer_question(img, query)
+            if print_log:
+                print(result)
             # Call the answer_question method for each batch of images and add to the answers list
             answers.append(result)
 
@@ -99,27 +106,42 @@ class Image2TextWithTags:
                 "score": ("BOOLEAN", {
                     "default": False,
                     
-                })
+                }),
+                "remove_1girl": ("BOOLEAN", {
+                    "default": True,
+                    
+                }),
+
             },
         ) 
         return result
     
-    OUTPUT_IS_LIST = (True,)
-    RETURN_TYPES = ("STRING", )
-    RETURN_NAMES = ('FULL PROMPT', )
+    OUTPUT_IS_LIST = (True,True,True)
+    RETURN_TYPES = ("STRING", "STRING", "STRING")
+    RETURN_NAMES = ('FULL PROMPT', "PROMPT", "TAGS")
     FUNCTION = "get_value"
     CATEGORY = "fofo"
 
-    def get_value(self, model, image, query, custom_query, score):
+    def get_value(self, model, image, query, custom_query, print_log, score,remove_1girl):
         global GLOBAL_WdV3Model
         if GLOBAL_WdV3Model is None:
             GLOBAL_WdV3Model=WdV3Model(device="cpu",low_memory=False)
 
-        result1 =  Image2Text().get_value(model, image, query, custom_query)
-        result2 =  Image2Text().get_value(GLOBAL_WdV3Model, image, query,"score" if score is True else "")
-
+        
+        result2 =  Image2Text().get_value(GLOBAL_WdV3Model, image, query, "score" if score is True else "",print_log)
+        
+            
+        result1 =  Image2Text().get_value(model, image, query, custom_query,print_log)
         output = []
         for r1 in result1[0]:
             for r2 in result2[0]:
+                if remove_1girl:
+                    r2 = remove_specific_patterns(r2)
                 output.append(f"{r1}\n\n{r2}")
-        return (output,)
+
+        return (output, result1[0], result2[0])
+    
+
+
+
+
