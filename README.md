@@ -10,8 +10,8 @@
 
 ### 介绍
 
-使用了`wd-swinv2-tagger-v3`模型增加人物描述的准确性。
-使用了`hahahafofo/Qwen-1_8B-Stable-Diffusion-Prompt`充分利用Qwen的能力，支持包括古诗词在内的多种形式进行提示语的生成。此模型基于35k 条数据进行特定于任务的微调(SFT)
+使用moondream等模型描述图片主要信息，同时使用了`wd-swinv2-tagger-v3`模型增加人物描述的准确性。
+使用了`hahahafofo/Qwen-1_8B-Stable-Diffusion-Prompt`充分利用Qwen的能力，支持包括古诗词在内的多种形式进行提示语的生成，此模型基于35k 条数据进行特定于任务的微调(SFT).
 
 ### 第1步：安装插件
 
@@ -47,6 +47,9 @@ huggingface-cli download --resume-download unum-cloud/uform-gen2-qwen-500m --loc
 
 
 
+
+Models such as `moondream` are used to describe the main information of the image, and the `wd-swinv2-tagger-v3` model is used to increase the accuracy of character description.
+Used `hahahafofo/Qwen-1_8B-Stable-Diffusion-Prompt` to make full use of Qwen's capabilities and support multiple forms of prompt generation including ancient poetry. This model is based on 35k pieces of data for task-specific fine-tuning ( SFT).
 
 ### Step 1: Install the Plugin
 
