@@ -1,0 +1,1835 @@
+{
+  "last_node_id": 90,
+  "last_link_id": 151,
+  "nodes": [
+    {
+      "id": 60,
+      "type": "VAEDecode",
+      "pos": [
+        2580,
+        287
+      ],
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 27,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 72
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 71
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            73
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      }
+    },
+    {
+      "id": 76,
+      "type": "KSampler",
+      "pos": [
+        1399,
+        420
+      ],
+      "size": {
+        "0": 382.7981872558594,
+        "1": 358.5155334472656
+      },
+      "flags": {},
+      "order": 18,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 117
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 116
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 118,
+          "slot_index": 2
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 119,
+          "slot_index": 3
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            113
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        628961395023909,
+        "fixed",
+        6,
+        2,
+        "dpmpp_sde",
+        "karras",
+        1
+      ],
+      "shape": 1
+    },
+    {
+      "id": 79,
+      "type": "CLIPTextEncode",
+      "pos": [
+        1413,
+        287
+      ],
+      "size": {
+        "0": 380,
+        "1": 250
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 115,
+          "slot_index": 0
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 114,
+          "widget": {
+            "name": "text"
+          },
+          "slot_index": 1
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            116
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "high resolution photograph of Son Goku, by Toriyama Akira, visible internal organs, polycarbonate and glass, very detailed, 8k, sharp, fantasy, movie poster, unreal engine 5, octane render, UHD, HDR"
+      ],
+      "color": "#232",
+      "bgcolor": "#353",
+      "shape": 1
+    },
+    {
+      "id": 25,
+      "type": "PatchModelAddDownscale",
+      "pos": [
+        499,
+        265
+      ],
+      "size": {
+        "0": 380,
+        "1": 202
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 21
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            20,
+            109
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PatchModelAddDownscale"
+      },
+      "widgets_values": [
+        3,
+        2,
+        0,
+        0.35,
+        true,
+        "bicubic",
+        "bicubic"
+      ],
+      "shape": 1
+    },
+    {
+      "id": 7,
+      "type": "CLIPTextEncode",
+      "pos": [
+        107,
+        483
+      ],
+      "size": {
+        "0": 380,
+        "1": 250
+      },
+      "flags": {
+        "collapsed": false
+      },
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 5
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            6,
+            108,
+            118,
+            125
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        ""
+      ],
+      "color": "#322",
+      "bgcolor": "#533",
+      "shape": 1
+    },
+    {
+      "id": 77,
+      "type": "VAEDecode",
+      "pos": [
+        1406,
+        325
+      ],
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {
+        "collapsed": false
+      },
+      "order": 22,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 113,
+          "slot_index": 0
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 111,
+          "slot_index": 1
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            128
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      }
+    },
+    {
+      "id": 80,
+      "type": "CLIPTextEncode",
+      "pos": [
+        963,
+        248
+      ],
+      "size": {
+        "0": 380,
+        "1": 250
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 120,
+          "slot_index": 0
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 121,
+          "widget": {
+            "name": "text"
+          },
+          "slot_index": 1
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            124
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "high resolution photograph of Son Goku, by Toriyama Akira, visible internal organs, polycarbonate and glass, very detailed, 8k, sharp, fantasy, movie poster, unreal engine 5, octane render, UHD, HDR"
+      ],
+      "color": "#232",
+      "bgcolor": "#353",
+      "shape": 1
+    },
+    {
+      "id": 81,
+      "type": "VAEDecode",
+      "pos": [
+        975,
+        294
+      ],
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 24,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 122,
+          "slot_index": 0
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 123,
+          "slot_index": 1
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            127
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      }
+    },
+    {
+      "id": 82,
+      "type": "KSampler",
+      "pos": [
+        918,
+        376
+      ],
+      "size": {
+        "0": 382.7981872558594,
+        "1": 358.5155334472656
+      },
+      "flags": {},
+      "order": 20,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 130,
+          "slot_index": 0
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 124
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 125,
+          "slot_index": 2
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 126,
+          "slot_index": 3
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            122
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        628961395023909,
+        "fixed",
+        6,
+        2,
+        "dpmpp_sde",
+        "karras",
+        1
+      ],
+      "shape": 1
+    },
+    {
+      "id": 72,
+      "type": "VAEDecode",
+      "pos": [
+        2010,
+        286
+      ],
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 25,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 101
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 103,
+          "slot_index": 1
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            106
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      }
+    },
+    {
+      "id": 73,
+      "type": "CLIPTextEncode",
+      "pos": [
+        2161,
+        282
+      ],
+      "size": {
+        "0": 380,
+        "1": 250
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 129,
+          "slot_index": 0
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 105,
+          "widget": {
+            "name": "text"
+          },
+          "slot_index": 1
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            107
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "high resolution photograph of Son Goku, by Toriyama Akira, visible internal organs, polycarbonate and glass, very detailed, 8k, sharp, fantasy, movie poster, unreal engine 5, octane render, UHD, HDR"
+      ],
+      "color": "#232",
+      "bgcolor": "#353",
+      "shape": 1
+    },
+    {
+      "id": 74,
+      "type": "PreviewImage",
+      "pos": [
+        1946,
+        831
+      ],
+      "size": {
+        "0": 605.234375,
+        "1": 867.6522827148438
+      },
+      "flags": {},
+      "order": 29,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 106
+        }
+      ],
+      "title": "Tags",
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      }
+    },
+    {
+      "id": 83,
+      "type": "PreviewImage",
+      "pos": [
+        1327,
+        839
+      ],
+      "size": {
+        "0": 605.234375,
+        "1": 867.6522827148438
+      },
+      "flags": {},
+      "order": 26,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 128
+        }
+      ],
+      "title": "Image2Text + Tags",
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      }
+    },
+    {
+      "id": 78,
+      "type": "PreviewImage",
+      "pos": [
+        695,
+        837
+      ],
+      "size": {
+        "0": 605.234375,
+        "1": 867.6522827148438
+      },
+      "flags": {},
+      "order": 28,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 127
+        }
+      ],
+      "title": "Image2Text",
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      }
+    },
+    {
+      "id": 4,
+      "type": "CheckpointLoaderSimple",
+      "pos": [
+        100,
+        280
+      ],
+      "size": {
+        "0": 380,
+        "1": 122
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            21,
+            117,
+            130
+          ],
+          "slot_index": 0
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            3,
+            5,
+            115,
+            120,
+            129
+          ],
+          "slot_index": 1
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            71,
+            103,
+            111,
+            123
+          ],
+          "slot_index": 2
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "sdxl_lightning/dreamshaperXL_lightningDPMSDE.safetensors"
+      ],
+      "shape": 1
+    },
+    {
+      "id": 44,
+      "type": "ShowText|pysssss",
+      "pos": [
+        1350,
+        -16
+      ],
+      "size": {
+        "0": 438.8477478027344,
+        "1": 219.60089111328125
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 90,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            114
+          ],
+          "shape": 6,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "",
+        "A person is depicted in this image, holding a sword and wearing a hat. In front of them, a large dragon is present. The background features smoke, buildings, and mountains. The sky is visible at the top of the image.\n\ncloud, hat, outdoors, dragon, sky, scenery, rating:general, standing, mountain, cloudy sky, fantasy, fire, smoke, from behind, monster, rating:sensitive"
+      ]
+    },
+    {
+      "id": 52,
+      "type": "ShowText|pysssss",
+      "pos": [
+        830,
+        -5
+      ],
+      "size": {
+        "0": 462.9586486816406,
+        "1": 177.8058624267578
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 86,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            121
+          ],
+          "shape": 6,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "",
+        "A person is depicted in this image, holding a sword and wearing a hat. In front of them, a large dragon is present. The background features smoke, buildings, and mountains. The sky is visible at the top of the image."
+      ]
+    },
+    {
+      "id": 42,
+      "type": "LoadImage2TextModel",
+      "pos": [
+        -1246,
+        -219
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE2TEXT_MODEL",
+          "type": "IMAGE2TEXT_MODEL",
+          "links": [
+            87
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage2TextModel"
+      },
+      "widgets_values": [
+        "moondream2",
+        "cuda",
+        false
+      ]
+    },
+    {
+      "id": 24,
+      "type": "SaveImage",
+      "pos": [
+        2573,
+        824
+      ],
+      "size": {
+        "0": 812.11328125,
+        "1": 863.9359130859375
+      },
+      "flags": {},
+      "order": 30,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 73
+        }
+      ],
+      "title": "Image2Text+Tags --Qwen->",
+      "properties": {},
+      "widgets_values": [
+        "RB"
+      ],
+      "shape": 1
+    },
+    {
+      "id": 5,
+      "type": "EmptyLatentImage",
+      "pos": [
+        98,
+        125
+      ],
+      "size": {
+        "0": 380,
+        "1": 110
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            2,
+            102,
+            119,
+            126
+          ],
+          "slot_index": 0
+        }
+      ],
+      "title": "Kohya HiRes",
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        1024,
+        1024,
+        1
+      ],
+      "shape": 1
+    },
+    {
+      "id": 66,
+      "type": "Image2TextWithTags",
+      "pos": [
+        -1357,
+        -68
+      ],
+      "size": {
+        "0": 401.9856262207031,
+        "1": 340.7137145996094
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "IMAGE2TEXT_MODEL",
+          "link": 87
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 88,
+          "slot_index": 1
+        }
+      ],
+      "outputs": [
+        {
+          "name": "FULL PROMPT",
+          "type": "STRING",
+          "links": [
+            90,
+            145
+          ],
+          "shape": 6,
+          "slot_index": 0
+        },
+        {
+          "name": "PROMPT",
+          "type": "STRING",
+          "links": [
+            86,
+            140
+          ],
+          "shape": 6,
+          "slot_index": 1
+        },
+        {
+          "name": "TAGS",
+          "type": "STRING",
+          "links": [
+            89,
+            141
+          ],
+          "shape": 6,
+          "slot_index": 2
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Image2TextWithTags"
+      },
+      "widgets_values": [
+        "Please describe this image in detail.",
+        "",
+        false,
+        false,
+        true
+      ]
+    },
+    {
+      "id": 71,
+      "type": "KSampler",
+      "pos": [
+        1962,
+        333
+      ],
+      "size": {
+        "0": 382.7981872558594,
+        "1": 358.5155334472656
+      },
+      "flags": {},
+      "order": 21,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 109
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 107
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 108,
+          "slot_index": 2
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 102
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            101
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        628961395023909,
+        "fixed",
+        6,
+        2,
+        "dpmpp_sde",
+        "karras",
+        1
+      ],
+      "shape": 1
+    },
+    {
+      "id": 3,
+      "type": "KSampler",
+      "pos": [
+        2554,
+        337
+      ],
+      "size": {
+        "0": 382.7981872558594,
+        "1": 358.5155334472656
+      },
+      "flags": {},
+      "order": 23,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 20
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 4
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 6
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 2
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            72
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        628961395023909,
+        "fixed",
+        6,
+        2,
+        "dpmpp_sde",
+        "karras",
+        1
+      ],
+      "shape": 1
+    },
+    {
+      "id": 87,
+      "type": "Text2GPTPrompt",
+      "pos": [
+        -892,
+        -667
+      ],
+      "size": [
+        426.38013793227424,
+        289.76932741754774
+      ],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text1",
+          "type": "STRING",
+          "link": 141,
+          "widget": {
+            "name": "text1"
+          }
+        },
+        {
+          "name": "text2",
+          "type": "STRING",
+          "link": 140,
+          "widget": {
+            "name": "text2"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            139
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Text2GPTPrompt"
+      },
+      "widgets_values": [
+        "You must use English and use the \"Supplementary Description\" content to add a more detailed picture description to the \"Picture Description\" within 77 words.",
+        "",
+        "",
+        "Supplementary Description:",
+        "Picture Description:",
+        "disable"
+      ]
+    },
+    {
+      "id": 6,
+      "type": "CLIPTextEncode",
+      "pos": [
+        2556,
+        223
+      ],
+      "size": [
+        380,
+        250
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 19,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 3
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 149,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            4
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "The image showcases a cat-shaped arrangement of sliced oranges on a white plate, set against a white floral tablecloth. The oranges are meticulously arranged to mimic the fur and body of a feline, with the slices forming a face and body. The plate is surrounded by whole oranges and leaves, creating a naturalistic backdrop. The image is a testament to culinary artistry, transforming food into a visually appealing and playful scene."
+      ],
+      "color": "#232",
+      "bgcolor": "#353",
+      "shape": 1
+    },
+    {
+      "id": 61,
+      "type": "LoadText2PromptModel",
+      "pos": [
+        -433,
+        84
+      ],
+      "size": {
+        "0": 472.0218811035156,
+        "1": 106
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "TEXT2PROMPT_MODEL",
+          "type": "TEXT2PROMPT_MODEL",
+          "links": [
+            142
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadText2PromptModel"
+      },
+      "widgets_values": [
+        "hahahafofo/Qwen-1_8B-Stable-Diffusion-Prompt",
+        "cuda",
+        true
+      ]
+    },
+    {
+      "id": 88,
+      "type": "Text2Prompt",
+      "pos": [
+        -379,
+        232
+      ],
+      "size": [
+        401.3764667968744,
+        589.9401062988277
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "TEXT2PROMPT_MODEL",
+          "link": 142
+        },
+        {
+          "name": "prompt",
+          "type": "STRING",
+          "link": 145,
+          "widget": {
+            "name": "prompt"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            151
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Text2Prompt"
+      },
+      "widgets_values": [
+        "no humans, rating:general, cat, food, letterboxed, fruit, animal focus, animal, orange (fruit), food focus, box, orange slice, in container\n\nA white tray is the central focus of this image, adorned with oranges and leaves. To the left, a few oranges are visible. The background features a white cloth, and the image is slightly blurry.",
+        128,
+        0.2,
+        "disable",
+        "NO",
+        "must be in english and describe a picture according to follow the description below within 77 words: ",
+        "You are a helpful assistant."
+      ]
+    },
+    {
+      "id": 43,
+      "type": "LoadImage",
+      "pos": [
+        24,
+        829
+      ],
+      "size": {
+        "0": 598.9038696289062,
+        "1": 940.3765869140625
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            88
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "WechatIMG3063.jpeg",
+        "image"
+      ]
+    },
+    {
+      "id": 86,
+      "type": "ShowText|pysssss",
+      "pos": [
+        -461,
+        -666
+      ],
+      "size": [
+        438.0960438851496,
+        337.6482089122162
+      ],
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 139,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "",
+        "You must use English and use the \"Supplementary Description\" content to add a more detailed picture description to the \"Picture Description\" within 77 words.\n\nSupplementary Description:cloud, hat, outdoors, dragon, sky, scenery, rating:general, standing, mountain, cloudy sky, fantasy, fire, smoke, from behind, monster, rating:sensitive\n\nSupplementary Description:A person is depicted in this image, holding a sword and wearing a hat. In front of them, a large dragon is present. The background features smoke, buildings, and mountains. The sky is visible at the top of the image.\n\n"
+      ]
+    },
+    {
+      "id": 63,
+      "type": "ShowText|pysssss",
+      "pos": [
+        2477,
+        -66
+      ],
+      "size": {
+        "0": 503.09796142578125,
+        "1": 237.53517150878906
+      },
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 151,
+          "widget": {
+            "name": "text"
+          },
+          "slot_index": 0
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            149
+          ],
+          "shape": 6,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "",
+        "a person with a sword and a hat, in front of a large dragon, in the background, smoke, buildings, mountains, clear sky, fantasy, fire, smoke, from behind, monster, trending on artstation, 4 k, award winning, highly detailed, intricate, cinematic lighting, vivid colors, realistic face, smooth, sharp focus, by greg rutkowski, wlop, artgerm, dramatic lighting, concept art, trending on artstation, 8 k\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
+      ]
+    },
+    {
+      "id": 53,
+      "type": "ShowText|pysssss",
+      "pos": [
+        1928,
+        -18
+      ],
+      "size": {
+        "0": 458.6483459472656,
+        "1": 195.6706085205078
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 89,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            105
+          ],
+          "shape": 6,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "",
+        "cloud, hat, outdoors, dragon, sky, scenery, rating:general, standing, mountain, cloudy sky, fantasy, fire, smoke, from behind, monster, rating:sensitive"
+      ]
+    }
+  ],
+  "links": [
+    [
+      2,
+      5,
+      0,
+      3,
+      3,
+      "LATENT"
+    ],
+    [
+      3,
+      4,
+      1,
+      6,
+      0,
+      "CLIP"
+    ],
+    [
+      4,
+      6,
+      0,
+      3,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      5,
+      4,
+      1,
+      7,
+      0,
+      "CLIP"
+    ],
+    [
+      6,
+      7,
+      0,
+      3,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      20,
+      25,
+      0,
+      3,
+      0,
+      "MODEL"
+    ],
+    [
+      21,
+      4,
+      0,
+      25,
+      0,
+      "MODEL"
+    ],
+    [
+      71,
+      4,
+      2,
+      60,
+      1,
+      "VAE"
+    ],
+    [
+      72,
+      3,
+      0,
+      60,
+      0,
+      "LATENT"
+    ],
+    [
+      73,
+      60,
+      0,
+      24,
+      0,
+      "IMAGE"
+    ],
+    [
+      86,
+      66,
+      1,
+      52,
+      0,
+      "STRING"
+    ],
+    [
+      87,
+      42,
+      0,
+      66,
+      0,
+      "IMAGE2TEXT_MODEL"
+    ],
+    [
+      88,
+      43,
+      0,
+      66,
+      1,
+      "IMAGE"
+    ],
+    [
+      89,
+      66,
+      2,
+      53,
+      0,
+      "STRING"
+    ],
+    [
+      90,
+      66,
+      0,
+      44,
+      0,
+      "STRING"
+    ],
+    [
+      101,
+      71,
+      0,
+      72,
+      0,
+      "LATENT"
+    ],
+    [
+      102,
+      5,
+      0,
+      71,
+      3,
+      "LATENT"
+    ],
+    [
+      103,
+      4,
+      2,
+      72,
+      1,
+      "VAE"
+    ],
+    [
+      105,
+      53,
+      0,
+      73,
+      1,
+      "STRING"
+    ],
+    [
+      106,
+      72,
+      0,
+      74,
+      0,
+      "IMAGE"
+    ],
+    [
+      107,
+      73,
+      0,
+      71,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      108,
+      7,
+      0,
+      71,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      109,
+      25,
+      0,
+      71,
+      0,
+      "MODEL"
+    ],
+    [
+      111,
+      4,
+      2,
+      77,
+      1,
+      "VAE"
+    ],
+    [
+      113,
+      76,
+      0,
+      77,
+      0,
+      "LATENT"
+    ],
+    [
+      114,
+      44,
+      0,
+      79,
+      1,
+      "STRING"
+    ],
+    [
+      115,
+      4,
+      1,
+      79,
+      0,
+      "CLIP"
+    ],
+    [
+      116,
+      79,
+      0,
+      76,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      117,
+      4,
+      0,
+      76,
+      0,
+      "MODEL"
+    ],
+    [
+      118,
+      7,
+      0,
+      76,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      119,
+      5,
+      0,
+      76,
+      3,
+      "LATENT"
+    ],
+    [
+      120,
+      4,
+      1,
+      80,
+      0,
+      "CLIP"
+    ],
+    [
+      121,
+      52,
+      0,
+      80,
+      1,
+      "STRING"
+    ],
+    [
+      122,
+      82,
+      0,
+      81,
+      0,
+      "LATENT"
+    ],
+    [
+      123,
+      4,
+      2,
+      81,
+      1,
+      "VAE"
+    ],
+    [
+      124,
+      80,
+      0,
+      82,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      125,
+      7,
+      0,
+      82,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      126,
+      5,
+      0,
+      82,
+      3,
+      "LATENT"
+    ],
+    [
+      127,
+      81,
+      0,
+      78,
+      0,
+      "IMAGE"
+    ],
+    [
+      128,
+      77,
+      0,
+      83,
+      0,
+      "IMAGE"
+    ],
+    [
+      129,
+      4,
+      1,
+      73,
+      0,
+      "CLIP"
+    ],
+    [
+      130,
+      4,
+      0,
+      82,
+      0,
+      "MODEL"
+    ],
+    [
+      139,
+      87,
+      0,
+      86,
+      0,
+      "STRING"
+    ],
+    [
+      140,
+      66,
+      1,
+      87,
+      1,
+      "STRING"
+    ],
+    [
+      141,
+      66,
+      2,
+      87,
+      0,
+      "STRING"
+    ],
+    [
+      142,
+      61,
+      0,
+      88,
+      0,
+      "TEXT2PROMPT_MODEL"
+    ],
+    [
+      145,
+      66,
+      0,
+      88,
+      1,
+      "STRING"
+    ],
+    [
+      149,
+      63,
+      0,
+      6,
+      1,
+      "STRING"
+    ],
+    [
+      151,
+      88,
+      0,
+      63,
+      0,
+      "STRING"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "0246.VERSION": [
+      0,
+      0,
+      4
+    ]
+  },
+  "version": 0.4
+}

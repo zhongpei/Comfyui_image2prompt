@@ -1,10 +1,6 @@
 from transformers import AutoModel, AutoProcessor
 import torch
-
 import os
-import os
-import torch
-
 from huggingface_hub import snapshot_download
 
 
@@ -12,7 +8,6 @@ from .install import get_ext_dir
 from .utils import pil2tensor
 
 
-import torch
 
 
 
