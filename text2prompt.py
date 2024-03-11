@@ -1,5 +1,6 @@
 from .qwen_model import QwenModel
 
+
 class LoadText2PromptModel:
     def __init__(self):
         pass
