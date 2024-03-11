@@ -5,7 +5,7 @@ from .uform_qwen_model import UformQwenModel
 from .wd_v3_model import WdV3Model
 from PIL import Image
 import numpy as np
-from .utils import remove_specific_patterns
+from .utils import remove_specific_patterns,tensor2pil
 
 GLOBAL_WdV3Model = None
 
@@ -81,13 +81,13 @@ class Image2Text:
         # Iterate over each batch of images
         for img in image:
             # Convert Tensor to image
-            img = Image.fromarray(
-                np.clip(255.0 * img.cpu().numpy(), 0, 255).astype(np.uint8)
-            )
+            
+            img = tensor2pil(img)
+            img = img.convert("RGB")
             # Additional processing for specific models
             if model.name == "internlm":
                 query = f"<ImageHere>{query}"
-
+            
             result = model.answer_question(img, query)
             if print_log:
                 print(result)

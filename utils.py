@@ -11,6 +11,10 @@ def tensor2pil(image):
     return Image.fromarray(np.clip(255. * image.cpu().numpy().squeeze(), 0, 255).astype(np.uint8))
 
 
+
+
+
+
 def remove_specific_patterns(text):
     # 构建一个匹配特定词汇前面有数字的正则表达式
     pattern = r"\d+(girl|boy|man|person|woman|men|women|girls|boys|mans),*\b"
