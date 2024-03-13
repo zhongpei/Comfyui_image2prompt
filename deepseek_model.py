@@ -24,18 +24,22 @@ class DeepseekVLModel():
         else:
             model_path = snapshot_download(repo, local_dir=local_dir,force_download=True, resume_download=False)
         
-        vl_chat_processor: VLChatProcessor = VLChatProcessor.from_pretrained(model_path)
-        self.vl_chat_processor=vl_chat_processor
-        self.tokenizer = vl_chat_processor.tokenizer
+        vl_chat_processor: VLChatProcessor = VLChatProcessor.from_pretrained(model_path,torch_dtype="auto", )
+
 
         vl_gpt: MultiModalityCausalLM = AutoModelForCausalLM.from_pretrained(model_path, trust_remote_code=True)
-        if is_bf16_supported() and device == "cuda":
+        if device == "cuda" and is_bf16_supported():
             self.vl_gpt = vl_gpt.to(torch.bfloat16).cuda().eval()
+            
         elif device == "cuda":
             self.vl_gpt = vl_gpt.to(torch.float16).cuda().eval()
+            
         else:
             self.vl_gpt = vl_gpt.to(torch.float32).cpu().eval()
+            
         self.device =device
+        self.vl_chat_processor=vl_chat_processor
+        self.tokenizer = vl_chat_processor.tokenizer
 
     def answer_question(self, image, question):     
         conversation = [
@@ -57,7 +61,12 @@ class DeepseekVLModel():
             images=[image,],
             force_batchify=True
         )
-        prepare_inputs=prepare_inputs.to(self.vl_gpt.device)
+        if self.device == "cuda" and is_bf16_supported():
+            prepare_inputs=prepare_inputs.to(dtype=torch.bfloat16,device="cuda")
+        elif self.device == "cuda":
+            prepare_inputs=prepare_inputs.to(dtype=torch.float16,device="cuda")
+        else:
+            prepare_inputs=prepare_inputs.to(dtype=torch.float,device="cpu")
 
         # run image encoder to get the image embeddings
         inputs_embeds = self.vl_gpt.prepare_inputs_embeds(**prepare_inputs)
