@@ -28,6 +28,9 @@ def check_and_install_version(package_name, required_version, up_version=True, i
         if up_version and version.parse(installed_version) >= version.parse(required_version):
             print(f"{package_name}的当前版本{installed_version}满足要求，无需安装{required_version}版本。")
             return
+        elif installed_version == required_version:
+            print(f"{package_name}的当前版本{installed_version}满足要求，无需安装{required_version}版本。")
+            return
         else:
             print(f"{package_name}的当前版本{installed_version}低于要求的{required_version}，将尝试安装。")
     except ImportError:

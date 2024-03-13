@@ -23,7 +23,7 @@ check_and_install("tiktoken")
 check_and_install("attrdict")
 check_and_install_version("einops","0.7.0")
 check_and_install_version("sentencepiece","0.2.0")
-check_and_install("git+https://github.com/deepseek-ai/DeepSeek-VL",import_name="deepseek_vl")
+check_and_install("git+https://github.com/deepseek-ai/DeepSeek-VL.git@86a3096",import_name="deepseek_vl")
 
 # >= 4.37.1 Qwen-1.5      
 # >= 4.38.2 deepseek 
