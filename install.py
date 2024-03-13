@@ -4,7 +4,12 @@ import sys
 import subprocess
 import sys
 from importlib import import_module
-
+# python3.10 hack for attrdict
+import collections
+import collections.abc
+for type_name in collections.abc.__all__:
+    setattr(collections, type_name, getattr(collections.abc, type_name))
+    
 def install_package(package):
     subprocess.check_call([sys.executable, "-m", "pip", "install", "--no-cache-dir", package])
 

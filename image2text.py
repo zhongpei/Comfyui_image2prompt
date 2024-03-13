@@ -2,6 +2,7 @@ from .moondream_model import MoondreamModel
 from .moodream2_model import Moodream2Model
 from .internlm_model import InternlmVLModle
 from .uform_qwen_model import UformQwenModel
+from .deepseek_model import DeepseekVLModel
 from .wd_v3_model import WdV3Model
 from PIL import Image
 import numpy as np
@@ -16,7 +17,15 @@ class LoadImage2TextModel:
     def INPUT_TYPES(cls):
         return {
             "required": {
-                "model": (["moondream1","moondream2", "internlm-xcomposer2-vl-7b", "uform-qwen","wd-swinv2-tagger-v3"], {"default": "moondream1"}),
+                "model": ([
+                    "moondream1",
+                    "moondream2", 
+                    "internlm-xcomposer2-vl-7b", 
+                    "uform-qwen",
+                    "wd-swinv2-tagger-v3",
+                    "deepseek-vl-1.3b-chat",
+                    "deepseek-vl-7b-chat",
+                    ], {"default": "moondream1"}),
                 "device": (["cpu", "cuda", ], {"default": "cuda"}),
                 "low_memory": ("BOOLEAN", {"default": False}),
             }
@@ -37,6 +46,8 @@ class LoadImage2TextModel:
             return (Moodream2Model(device=device,low_memory=low_memory),)
         elif model == "wd-swinv2-tagger-v3":
             return (WdV3Model(device=device,low_memory=low_memory),)
+        elif model == "deepseek-vl-1.3b-chat" or model == "deepseek-vl-7b-chat":
+            return (DeepseekVLModel(device=device,low_memory=low_memory,model_name=model), )
         
         return (MoondreamModel(device=device,low_memory=low_memory),)
     
