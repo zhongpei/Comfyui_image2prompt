@@ -1,6 +1,9 @@
 ### 基础流程
 ![image](workflows/workflow.jpg)
 
+### 7B模型流程
+![image](workflows/deepseek-vl-7b.png)
+
 ### 几种文生图比较
 ![image](workflows/prompt_compare.png)
 
@@ -13,7 +16,7 @@
 
 - 我们采用了`wd-swinv2-tagger-v3`模型，显著提升了人物特征的描述准确度，特别适用于需要细腻描绘人物的场景。
 - 对于场景描写，`moondream1`模型提供了丰富的细节，但有时候可能显得冗长并缺乏准确性。相比之下，`moondream2`模型以其简洁而精确的场景描述脱颖而出。因此，在使用`Image2TextWithTags`节点时，对于以场景为主的文本生成，推荐`moondream1`与`wd-swinv2-tagger-v3`的组合；而对于注重人物描述的内容，`wd-swinv2-tagger-v3`与`moondream2`的搭配将是理想选择。
-- `Text2GPTPrompt`节点旨在创造高效的Prompt，该Prompt能够融合`moondream`系列模型和`wd-swinv2-tagger-v3`产生的关键词，为7b级别的模型定制，内含`qwen1.5-7b`。
+- `Text2GPTPrompt`节点旨在创造高效的Prompt，该Prompt能够融合`moondream`系列模型和`wd-swinv2-tagger-v3`产生的关键词，为7b级别的模型定制，内含`qwen1.5-7b`和`deepseek-ai/deepseek-vl-7b-chat`。
 - 利用`hahahafofo/Qwen-1_8B-Stable-Diffusion-Prompt`模型，我们能够充分发挥Qwen的潜力，特别是在生成包括古诗词在内的各式提示语时展现卓越性能。此模型经过35000条数据的特定任务微调(SFT)，不仅性价比高，而且在CPU上运行的速度也相当可观。
 
 
@@ -40,7 +43,7 @@ git clone https://github.com/zhongpei/Comfyui-image2prompt
 * [下载internlm-xcomposer2-vl-7b模型](https://huggingface.co/internlm/internlm-xcomposer2-vl-7b)
 * [下载uform-gen2-qwen-500m模型](https://huggingface.co/unum-cloud/uform-gen2-qwen-500m)
 * [下载Qwen-1_8B-Stable-Diffusion-Prompt](https://huggingface.co/hahahafofo/Qwen-1_8B-Stable-Diffusion-Prompt)
-
+* [deepseek-ai/deepseek-vl-1.3b-chat](https://huggingface.co/deepseek-ai/deepseek-vl-1.3b-chat)
 此外，如果您更喜欢使用镜像站点下载，可以将Hugging Face端点设置为镜像URL。在终端中执行以下命令以使用镜像：
 
 ```bash
@@ -79,7 +82,7 @@ The model will be automatically downloaded the first time it is run. If it does 
 * [Download internlm-xcomposer2-vl-7b Model](https://huggingface.co/internlm/internlm-xcomposer2-vl-7b)
 * [Download uform-gen2-qwen-500m Model](https://huggingface.co/unum-cloud/uform-gen2-qwen-500m)
 * [Download Qwen-1_8B-Stable-Diffusion-Prompt](https://huggingface.co/hahahafofo/Qwen-1_8B-Stable-Diffusion-Prompt)
-
+* [Download deepseek-vl-1.3b-chat](https://huggingface.co/deepseek-ai/deepseek-vl-1.3b-chat)
 Additionally, if you prefer using a chinese mirror site for downloading, you can set the Hugging Face endpoint to a mirror URL. Execute the following commands in your terminal to utilize the mirror:
 
 ```bash

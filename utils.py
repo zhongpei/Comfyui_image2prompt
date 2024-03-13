@@ -37,12 +37,25 @@ def is_bf16_supported():
     # 在较新的PyTorch版本中，可以直接通过属性检查支持
     # 注意：这个属性可能在不同版本的PyTorch中有所不同
     # 请根据您的PyTorch版本进行调整
+
+    bf16_supported_gpus = [
+        'NVIDIA A100',
+        'NVIDIA V100',
+        'NVIDIA GeForce RTX 3090',  # 3090支持bf16
+        'NVIDIA GeForce RTX 4090',  # 4090支持bf16
+        # 根据需要添加更多支持bf16的显卡型号
+    ]
     if hasattr(device_properties, 'supports_bfloat16'):
         return device_properties.supports_bfloat16
-    else:
-        # 对于旧版本的PyTorch，可能需要根据具体的GPU型号来手动判断
-        # 或者假定最新的几代GPU支持BF16
-        print("Unable to directly check BF16 support. Please check your PyTorch version and GPU specs.")
-        return False
+    
+    # 对于旧版本的PyTorch，可能需要根据具体的GPU型号来手动判断
+    # 或者假定最新的几代GPU支持BF16
+    gpu_model = torch.cuda.get_device_name(0)
+    if any(supported_gpu in gpu_model for supported_gpu in bf16_supported_gpus):
+        print(f"{gpu_model} supports bf16.")
+        return True
+    
+    print(f"{gpu_model} Unable to directly check BF16 support. Please check your PyTorch version and GPU specs.")
+    return False
 
 

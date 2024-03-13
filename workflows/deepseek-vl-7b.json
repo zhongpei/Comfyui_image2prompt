@@ -1,0 +1,476 @@
+{
+  "last_node_id": 11,
+  "last_link_id": 13,
+  "nodes": [
+    {
+      "id": 2,
+      "type": "LoadImage2TextModel",
+      "pos": [
+        4039,
+        -543
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE2TEXT_MODEL",
+          "type": "IMAGE2TEXT_MODEL",
+          "links": [
+            4,
+            10
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage2TextModel"
+      },
+      "widgets_values": [
+        "deepseek-vl-7b-chat",
+        "cuda",
+        false
+      ]
+    },
+    {
+      "id": 7,
+      "type": "Image2TextWithTags",
+      "pos": [
+        4362,
+        -561
+      ],
+      "size": {
+        "0": 400,
+        "1": 212
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "IMAGE2TEXT_MODEL",
+          "link": 4
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 5,
+          "slot_index": 1
+        }
+      ],
+      "outputs": [
+        {
+          "name": "FULL PROMPT",
+          "type": "STRING",
+          "links": [
+            13
+          ],
+          "shape": 6,
+          "slot_index": 0
+        },
+        {
+          "name": "PROMPT",
+          "type": "STRING",
+          "links": [
+            6
+          ],
+          "shape": 6,
+          "slot_index": 1
+        },
+        {
+          "name": "TAGS",
+          "type": "STRING",
+          "links": [
+            7
+          ],
+          "shape": 6,
+          "slot_index": 2
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Image2TextWithTags"
+      },
+      "widgets_values": [
+        "Please describe this image in detail.",
+        "",
+        false,
+        false,
+        true
+      ]
+    },
+    {
+      "id": 4,
+      "type": "ShowText|pysssss",
+      "pos": [
+        4366,
+        -300
+      ],
+      "size": [
+        395.49228304303324,
+        233.32551072357398
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 13,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "",
+        "The image portrays a woman with a golden aesthetic. She has curly hair that cascades down her shoulders, and her face is adorned with golden makeup, including eyeshadow and a nose and cheek contour. The woman is wearing a gold dress that matches her makeup and hair, and she has a gold necklace with a flower pendant around her neck. The background is a blend of a starry sky and orange flowers, creating a dreamy and ethereal atmosphere. The woman's gaze is directed upwards, towards the sky, and she has a serene expression on her face. The overall image exudes a sense of luxury and opulence, with the golden elements standing out against the contrasting background.\n\n, solo, flower, freckles, brown hair, realistic, rating:sensitive, looking up, lips, parted lips, orange flower, long hair, eyelashes, bare shoulders, upper body, collarbone, star (sky), blue eyes, yellow flower, dress, sky"
+      ]
+    },
+    {
+      "id": 8,
+      "type": "Text2GPTPrompt",
+      "pos": [
+        4779,
+        -563
+      ],
+      "size": [
+        400,
+        300.0000305175781
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text1",
+          "type": "STRING",
+          "link": 6,
+          "widget": {
+            "name": "text1"
+          }
+        },
+        {
+          "name": "text2",
+          "type": "STRING",
+          "link": 7,
+          "widget": {
+            "name": "text2"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            8
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Text2GPTPrompt"
+      },
+      "widgets_values": [
+        "You must use English and use the \"Supplementary Description\" content to add a more detailed picture description to the \"Picture Description\" within 77 words.",
+        "",
+        "",
+        "Picture Description:",
+        "Supplementary Description:",
+        "disable"
+      ]
+    },
+    {
+      "id": 10,
+      "type": "Image2Text",
+      "pos": [
+        5206,
+        -560
+      ],
+      "size": [
+        394.15710800167653,
+        280.63105847413124
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "IMAGE2TEXT_MODEL",
+          "link": 10,
+          "slot_index": 0
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 9,
+          "slot_index": 1
+        },
+        {
+          "name": "custom_query",
+          "type": "STRING",
+          "link": 11,
+          "widget": {
+            "name": "custom_query"
+          },
+          "slot_index": 2
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            12
+          ],
+          "shape": 6,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Image2Text"
+      },
+      "widgets_values": [
+        "What is this?",
+        "",
+        false
+      ]
+    },
+    {
+      "id": 11,
+      "type": "ShowText|pysssss",
+      "pos": [
+        5215,
+        -232
+      ],
+      "size": [
+        416.5708895901971,
+        367.353665066727
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 12,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [],
+          "shape": 6,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "",
+        "The girl stands alone amidst a field of orange flowers, her freckled skin glistening with golden freckles that match the golden elements of her attire. Her long, curly brown hair cascades down her shoulders, framing her face with its natural beauty. She gazes upwards, her blue eyes sparkling with a sense of wonder, as if she's looking at something beyond the frame of the image. Her lips are parted, revealing a hint of her pearly white teeth, and her delicate eyelashes frame her expressive eyes. The dress she wears is a shimmering gold, its fabric clinging to her form, and it falls just above her bare shoulders, revealing the delicate collarbone. The gold necklace around her neck features a flower pendant, adding to the golden theme. The background is a blend of a starry sky and orange flowers, creating a dreamy and ethereal atmosphere. The contrast between the golden girl and the blue sky behind her adds depth to the image, making it a captivating and enchanting sight."
+      ]
+    },
+    {
+      "id": 9,
+      "type": "ShowText|pysssss",
+      "pos": [
+        4772,
+        -224
+      ],
+      "size": [
+        430.6823981096768,
+        407.1555845170034
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 8,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            11
+          ],
+          "shape": 6,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "",
+        "You must use English and use the \"Supplementary Description\" content to add a more detailed picture description to the \"Picture Description\" within 77 words.\n\nPicture Description:The image portrays a woman with a golden aesthetic. She has curly hair that cascades down her shoulders, and her face is adorned with golden makeup, including eyeshadow and a nose and cheek contour. The woman is wearing a gold dress that matches her makeup and hair, and she has a gold necklace with a flower pendant around her neck. The background is a blend of a starry sky and orange flowers, creating a dreamy and ethereal atmosphere. The woman's gaze is directed upwards, towards the sky, and she has a serene expression on her face. The overall image exudes a sense of luxury and opulence, with the golden elements standing out against the contrasting background.\n\nPicture Description:1girl, solo, flower, freckles, brown hair, realistic, rating:sensitive, looking up, lips, parted lips, orange flower, long hair, eyelashes, bare shoulders, upper body, collarbone, star (sky), blue eyes, yellow flower, dress, sky\n\n"
+      ]
+    },
+    {
+      "id": 3,
+      "type": "LoadImage",
+      "pos": [
+        4254,
+        -238
+      ],
+      "size": [
+        317.41337918791305,
+        420.6907583787789
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            5,
+            9
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "img__00089_.png",
+        "image"
+      ]
+    }
+  ],
+  "links": [
+    [
+      4,
+      2,
+      0,
+      7,
+      0,
+      "IMAGE2TEXT_MODEL"
+    ],
+    [
+      5,
+      3,
+      0,
+      7,
+      1,
+      "IMAGE"
+    ],
+    [
+      6,
+      7,
+      1,
+      8,
+      0,
+      "STRING"
+    ],
+    [
+      7,
+      7,
+      2,
+      8,
+      1,
+      "STRING"
+    ],
+    [
+      8,
+      8,
+      0,
+      9,
+      0,
+      "STRING"
+    ],
+    [
+      9,
+      3,
+      0,
+      10,
+      1,
+      "IMAGE"
+    ],
+    [
+      10,
+      2,
+      0,
+      10,
+      0,
+      "IMAGE2TEXT_MODEL"
+    ],
+    [
+      11,
+      9,
+      0,
+      10,
+      2,
+      "STRING"
+    ],
+    [
+      12,
+      10,
+      0,
+      11,
+      0,
+      "STRING"
+    ],
+    [
+      13,
+      7,
+      0,
+      4,
+      0,
+      "STRING"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "0246.VERSION": [
+      0,
+      0,
+      4
+    ]
+  },
+  "version": 0.4
+}
