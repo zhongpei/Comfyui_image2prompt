@@ -41,8 +41,15 @@ def is_bf16_supported():
     bf16_supported_gpus = [
         'NVIDIA A100',
         'NVIDIA V100',
+        'NVIDIA GeForce RTX 3060',  # 3090支持bf16
+        'NVIDIA GeForce RTX 3070',  # 3090支持bf16
+        'NVIDIA GeForce RTX 3080',  # 3090支持bf16
         'NVIDIA GeForce RTX 3090',  # 3090支持bf16
         'NVIDIA GeForce RTX 4090',  # 4090支持bf16
+        "NVIDIA GeForce RTX 4060 Ti",
+        "NVIDIA GeForce RTX 4060",
+        "NVIDIA GeForce RTX 4070",
+        "NVIDIA GeForce RTX 4080"
         # 根据需要添加更多支持bf16的显卡型号
     ]
     if hasattr(device_properties, 'supports_bfloat16'):
