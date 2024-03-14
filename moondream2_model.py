@@ -24,7 +24,7 @@ class Moodream2Model():
         if os.path.exists(local_dir):
             model_path = local_dir
         else:
-            model_path = snapshot_download(repo, local_dir=local_dir, revision="2024-03-04")
+            model_path = snapshot_download(repo, local_dir=local_dir, revision="2024-03-05")
 
         
 
@@ -36,14 +36,14 @@ class Moodream2Model():
         else:
             device, dtype = "cpu", torch.float32
 
-        self.tokenizer = AutoTokenizer.from_pretrained(model_path, trust_remote_code=True ,revision="2024-03-04")
+        self.tokenizer = AutoTokenizer.from_pretrained(model_path, trust_remote_code=True ,revision="2024-03-05")
         if torch.cuda.is_available() and device == "cuda":
             self.model = AutoModelForCausalLM.from_pretrained(                
                 model_path, 
                 torch_dtype=dtype, 
                 trust_remote_code=True,              
                 max_length=1024,
-                revision="2024-03-04"
+                revision="2024-03-05"
             ).to(device).eval()
 
             
@@ -53,7 +53,7 @@ class Moodream2Model():
                 torch_dtype=dtype, 
                 trust_remote_code=True,
                 max_length=1024,
-                revision="2024-03-04"
+                revision="2024-03-05"
             ).to(device).float().eval()
         
         print(f"{repo} loaded on {device}. dtype {dtype}")

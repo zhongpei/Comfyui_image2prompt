@@ -1,5 +1,5 @@
 from .moondream_model import MoondreamModel
-from .moodream2_model import Moodream2Model
+from .moondream2_model import Moodream2Model
 from .internlm_model import InternlmVLModle
 from .uform_qwen_model import UformQwenModel
 from .deepseek_model import DeepseekVLModel
