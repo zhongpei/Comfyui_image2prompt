@@ -464,6 +464,8 @@ class SelfAttention(nn.Module):
             padding_mask = torch.full(
                 (batch_size, seqlen), -10000.0, dtype=scores.dtype, device=scores.device
             )
+            key_padding_mask = key_padding_mask[:, :seqlen_k]
+            
             padding_mask.masked_fill_(key_padding_mask, 0.0)
 
             scores = scores + rearrange(padding_mask, "b s -> b 1 1 s")
