@@ -7,7 +7,7 @@ import os
 from huggingface_hub import snapshot_download
 import re
 
-from .install import get_ext_dir
+from .install import get_model_dir
 from .utils import pil2tensor, is_bf16_supported
 
 
@@ -19,7 +19,7 @@ class Moodream2Model():
 
         repo="vikhyatk/moondream2"
         self.name = "moondream2"
-        local_dir = get_ext_dir("model/moondream2")
+        local_dir = get_model_dir("moondream2")
         self.device = device
         if os.path.exists(local_dir):
             model_path = local_dir
