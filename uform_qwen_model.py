@@ -4,7 +4,7 @@ import os
 from huggingface_hub import snapshot_download
 
 
-from .install import get_ext_dir
+from .install import get_model_dir
 from .utils import pil2tensor
 
 
@@ -16,7 +16,7 @@ class UformQwenModel():
 
         repo="unum-cloud/uform-gen2-qwen-500m"
         self.name = "uform-qwen"
-        local_dir = get_ext_dir("model/uform-gen2-qwen-500m")
+        local_dir = get_model_dir("uform-gen2-qwen-500m")
         self.device = device
         if os.path.exists(local_dir):
             model_path = local_dir

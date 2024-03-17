@@ -34,7 +34,7 @@ class LoadImage2TextModel:
 
     RETURN_TYPES = ("IMAGE2TEXT_MODEL",)
     FUNCTION = "get_model"
-    CATEGORY = "fofo"
+    CATEGORY = "fofo🐼"
 
     def get_model(self, model, device, low_memory):       
             
@@ -81,7 +81,7 @@ class Image2Text:
     OUTPUT_IS_LIST = (True,)
     RETURN_TYPES = ("STRING",)
     FUNCTION = "get_value"
-    CATEGORY = "fofo"
+    CATEGORY = "fofo🐼"
 
     def get_value(self, model, image, query, custom_query, print_log):
         # Ensure custom queries are prioritized
@@ -131,7 +131,7 @@ class Image2TextWithTags:
     RETURN_TYPES = ("STRING", "STRING", "STRING")
     RETURN_NAMES = ('FULL PROMPT', "PROMPT", "TAGS")
     FUNCTION = "get_value"
-    CATEGORY = "fofo"
+    CATEGORY = "fofo🐼"
 
     def get_value(self, model, image, query, custom_query, print_log, score,remove_1girl):
         global GLOBAL_WdV3Model

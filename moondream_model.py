@@ -1163,7 +1163,7 @@ from huggingface_hub import snapshot_download
 
 import hashlib
 import os
-from .install import get_ext_dir
+from .install import get_model_dir
 
 
     
@@ -1187,7 +1187,7 @@ class MoondreamModel():
 
     @classmethod
     def load_model(cls, device="cpu", dtype=torch.float32):
-        local_dir = get_ext_dir("model/moondream1")
+        local_dir = get_model_dir("moondream1")
         if os.path.exists(local_dir):
             model_path = local_dir
         else:

@@ -1,7 +1,7 @@
 import torch
 from transformers import AutoModelForCausalLM
 import os
-from .install import get_ext_dir
+from .install import get_model_dir
 from .utils import is_bf16_supported
 
 import collections
@@ -17,7 +17,7 @@ class DeepseekVLModel():
         # specify the path to the model
         repo = f"deepseek-ai/{model_name}"
         self.name = f"{model_name}"
-        local_dir = get_ext_dir(f"model/{model_name}")
+        local_dir = get_model_dir(f"{model_name}")
         self.device = device
         if os.path.exists(local_dir):
             model_path = local_dir

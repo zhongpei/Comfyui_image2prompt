@@ -1,7 +1,7 @@
 from transformers import AutoModelForCausalLM, AutoTokenizer
 import os
 from huggingface_hub import snapshot_download
-from .install import get_ext_dir
+from .install import get_model_dir
 import torch
 
 
@@ -10,7 +10,7 @@ class QwenModel():
 
         
         self.name = "qwen"
-        local_dir = get_ext_dir("model/{}".format(repo.replace("/","__")))
+        local_dir = get_model_dir("{}".format(repo.replace("/","__")))
         self.device = device
         if os.path.exists(local_dir):
             model_path = local_dir

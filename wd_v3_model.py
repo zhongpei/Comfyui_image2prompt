@@ -10,7 +10,7 @@ import re
 from huggingface_hub import snapshot_download
 
 
-from .install import get_ext_dir
+from .install import get_model_dir
 from .utils import pil2tensor,is_bf16_supported
 
 
@@ -23,7 +23,7 @@ class WdV3Model():
 
         repo="p1atdev/wd-swinv2-tagger-v3-hf"
         self.name = "wd-swinv2-tagger-v3"
-        local_dir = get_ext_dir("model/wd-swinv2-tagger-v3-hf")
+        local_dir = get_model_dir("wd-swinv2-tagger-v3-hf")
         self.device = device
         if os.path.exists(local_dir):
             model_path = local_dir
