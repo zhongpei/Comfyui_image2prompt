@@ -1,0 +1,797 @@
+{
+  "last_node_id": 164,
+  "last_link_id": 326,
+  "nodes": [
+    {
+      "id": 114,
+      "type": "Translate2Chinese|fofo",
+      "pos": [
+        1301,
+        1104
+      ],
+      "size": {
+        "0": 235.1999969482422,
+        "1": 82
+      },
+      "flags": {
+        "collapsed": false
+      },
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 229,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            231
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Translate2Chinese|fofo"
+      },
+      "widgets_values": [
+        "",
+        "enable",
+        "enable"
+      ]
+    },
+    {
+      "id": 115,
+      "type": "ShowText|fofo",
+      "pos": [
+        1303,
+        1228
+      ],
+      "size": {
+        "0": 326.4403076171875,
+        "1": 536.3543701171875
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 231,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|fofo"
+      },
+      "widgets_values": [
+        "",
+        "在这幅画中，一名年轻女子是主角，她站在熙熙攘攘的街道上。她穿着一件米色外套，提着一个棕色钱包。她手里拿着一个白色的外卖容器，里面装着一块裹着巧克力的糕点。在酥皮上撒上大量的巧克力和糖屑，为原本单色的菜肴增添了一抹鲜亮的色彩。\n\n这个女人站在一棵树前，这为城市环境提供了自然的背景。在背景中，有一些建筑和一辆汽车，表明街道的繁忙性质。这张照片捕捉到了日常生活的一个瞬间，在城市的喧嚣中，这位女士似乎在享受她的款待。\n\n逼真，珠宝，机动车，食物，棕色头发，包，车，项链，耳环，户外，评级:一般，外套，手提包，逼真，树，抱，闭上眼睛，单独对焦，长发，真实世界的位置，单独，照片背景，肩包，道路，天，衣服"
+      ]
+    },
+    {
+      "id": 78,
+      "type": "LoadImage2TextModel",
+      "pos": [
+        1296,
+        961
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE2TEXT_MODEL",
+          "type": "IMAGE2TEXT_MODEL",
+          "links": [
+            133
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage2TextModel"
+      },
+      "widgets_values": [
+        "deepseek-vl-1.3b-chat",
+        "cuda",
+        false
+      ]
+    },
+    {
+      "id": 147,
+      "type": "VAEDecode",
+      "pos": [
+        1309,
+        1919
+      ],
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 277
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 278
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            279
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      }
+    },
+    {
+      "id": 162,
+      "type": "TextBox|fofo",
+      "pos": [
+        127,
+        1099
+      ],
+      "size": {
+        "0": 630.8274536132812,
+        "1": 709.4608154296875
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "TextBox|fofo"
+      },
+      "widgets_values": [
+        "The image presents a striking portrait of a woman, who is the central figure in the composition. She is adorned in a white and gold outfit that features a high neckline and long sleeves, adding an air of elegance and mystery to her appearance. Her hair, styled in loose waves, cascades down her back, complementing the overall aesthetic of the image.\n\n wings, solo, hair ornament, jewelry, flower, hair flower, full body, brown hair, earrings, own hands together, looking at viewer, angel wings, long hair, leotard, white wings, feathered wings, bare shoulders, standing, brown eyes, hair bun, angel, nail polish, sandals\n\nThe woman is captured in a moment of prayer, her hands clasped together in a gesture of devotion. This gesture, combined with her serene expression, suggests a sense of peace and tranquility.The backdrop to this scene is a gold-colored wall, which serves to highlight the woman and draw the viewer's attention to her. The wall is embellished with intricate patterns and designs, adding depth and complexity to the image.\nThe woman's position in the center of the image, her attire, and the intricate background all contribute to a sense of balance and harmony in the composition. The image does not contain any discernible text or additional objects, focusing solely on the woman and her surroundings. The relative positions of the objects and the woman's pose create a dynamic and engaging visual narrative.\n\n"
+      ]
+    },
+    {
+      "id": 156,
+      "type": "CLIPTextEncode",
+      "pos": [
+        664,
+        2646
+      ],
+      "size": {
+        "0": 400,
+        "1": 200
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 316
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            299
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        ""
+      ]
+    },
+    {
+      "id": 146,
+      "type": "EmptyLatentImage",
+      "pos": [
+        645,
+        2439
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            313
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        1024,
+        1024,
+        1
+      ]
+    },
+    {
+      "id": 42,
+      "type": "LoadImage",
+      "pos": [
+        121,
+        2135
+      ],
+      "size": {
+        "0": 420.7445068359375,
+        "1": 545.92138671875
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            314
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "tutu2.jpg",
+        "image"
+      ]
+    },
+    {
+      "id": 148,
+      "type": "PreviewImage",
+      "pos": [
+        1668,
+        1917
+      ],
+      "size": {
+        "0": 638.3663330078125,
+        "1": 717.3773803710938
+      },
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 279
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      }
+    },
+    {
+      "id": 77,
+      "type": "Image2TextWithTags",
+      "pos": [
+        1639,
+        963
+      ],
+      "size": {
+        "0": 400,
+        "1": 212
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "IMAGE2TEXT_MODEL",
+          "link": 133
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 314
+        }
+      ],
+      "outputs": [
+        {
+          "name": "FULL PROMPT",
+          "type": "STRING",
+          "links": [
+            229,
+            230,
+            234,
+            324
+          ],
+          "shape": 6,
+          "slot_index": 0
+        },
+        {
+          "name": "PROMPT",
+          "type": "STRING",
+          "links": [],
+          "shape": 6,
+          "slot_index": 1
+        },
+        {
+          "name": "TAGS",
+          "type": "STRING",
+          "links": [],
+          "shape": 6,
+          "slot_index": 2
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Image2TextWithTags"
+      },
+      "widgets_values": [
+        "Please describe this image in detail.",
+        "",
+        false,
+        false,
+        true
+      ]
+    },
+    {
+      "id": 10,
+      "type": "CheckpointLoaderSimple",
+      "pos": [
+        120,
+        1867
+      ],
+      "size": {
+        "0": 416.99871826171875,
+        "1": 210.74755859375
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            311
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            316,
+            326
+          ],
+          "shape": 3,
+          "slot_index": 1
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            278
+          ],
+          "shape": 3,
+          "slot_index": 2
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "sdxl_lightning/dreamshaperXL_lightningDPMSDE.safetensors"
+      ]
+    },
+    {
+      "id": 163,
+      "type": "Note",
+      "pos": [
+        1084,
+        1912
+      ],
+      "size": {
+        "0": 561.5259399414062,
+        "1": 441.17657470703125
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "    sculptor_intensity:效果的强度。如果方向没有反转，最多到3，你将保留你提示的总体意义。如果反转，则不要超过1~2.5，否则随机性增强。\n    sculptor_method:\n        forward：减去最近的向量。超过1可能会有逆效果。\n        backward：相反，加上它们。\n        maximum_absolute：规范化向量并选择最远离0的值。除了设置为0时禁用外，强度在这里没有效果。这倾向于使简单主题的构成更复杂，复杂提示更混乱。根据情况可能有益也可能没有。它主要是为了好玩，但对于抽象概念可以产生极好的结果。\n    token_normalization：重新工作每个向量的大小。\n    建议要么“无”保留默认设置，要么“平均”设置每个令牌的重要性为它们的整体平均值。\n    “设置为1”会将它们全部设置为1，我不知道这是否是个好主意。\n    “所有令牌的平均值”将取预设条件权重内所有向量的平均值，这可能是个坏主意，但也为什么不呢。\n    如果强度设置为0，令牌的规范化仍然有效。将其设置为0并选择“无”将返回默认的舒适条件。\n\n    无论主题如何，两个方向都提供有效的变化。\n\n    对于一般用途，我推荐向后设置0.5用于正面提示，并对于负面提示“保持原位”。\n\n    将令牌大小规范化为它们的平均值似乎也有积极的效果。特别是对于负面提示，这似乎降低了毁坏图像的比例。\n\n    将令牌大小规范化为它们的平均值似乎也有积极的效果。特别是对于负面提示，这似乎降低了毁坏图像的比例。\n    merge_conditioning_type：球面线性插值，平均\n    merge_conditioning_strength_custom： “分别设置\\\\n\\\\n换行的prompt的值，用逗号分割，数量为分段数量-1”"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 164,
+      "type": "CLIP PromptConditioning|fofo",
+      "pos": [
+        656,
+        1911
+      ],
+      "size": [
+        400,
+        246.0001220703125
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 326
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 324,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            325
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIP PromptConditioning|fofo"
+      },
+      "widgets_values": [
+        "",
+        "average",
+        0.5,
+        "",
+        1,
+        "forward",
+        "none"
+      ]
+    },
+    {
+      "id": 144,
+      "type": "KSampler",
+      "pos": [
+        975,
+        2446
+      ],
+      "size": {
+        "0": 315,
+        "1": 262
+      },
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 311
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 325
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 299
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 313
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            277
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        475469906075355,
+        "randomize",
+        8,
+        2.5,
+        "dpmpp_sde",
+        "karras",
+        1
+      ]
+    },
+    {
+      "id": 116,
+      "type": "ShowText|fofo",
+      "pos": [
+        1665,
+        1250
+      ],
+      "size": {
+        "0": 390.4206237792969,
+        "1": 531.3086547851562
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 230,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [],
+          "shape": 6,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|fofo"
+      },
+      "widgets_values": [
+        "",
+        "In the image, a young woman is the main subject, standing on a bustling street. She is dressed in a beige coat and carries a brown purse. In her hands, she holds a white takeout container, which contains a chocolate-covered pastry. The pastry is topped with a generous amount of chocolate and sprinkles, adding a pop of color to the otherwise monochrome dish.\n\nThe woman is positioned in front of a tree, which provides a natural backdrop to the urban setting. In the background, there are buildings and a car, indicating the busy nature of the street. The image captures a moment of everyday life, with the woman seemingly enjoying her treat amidst the hustle and bustle of the city.\n\nrealistic, , jewelry, motor vehicle, food, brown hair, bag, car, necklace, earrings, outdoors, rating:general, coat, handbag, photorealistic, tree, holding, closed eyes, solo focus, long hair, real world location, solo, photo background, shoulder bag, road, day, dress"
+      ]
+    }
+  ],
+  "links": [
+    [
+      133,
+      78,
+      0,
+      77,
+      0,
+      "IMAGE2TEXT_MODEL"
+    ],
+    [
+      229,
+      77,
+      0,
+      114,
+      0,
+      "STRING"
+    ],
+    [
+      230,
+      77,
+      0,
+      116,
+      0,
+      "STRING"
+    ],
+    [
+      231,
+      114,
+      0,
+      115,
+      0,
+      "STRING"
+    ],
+    [
+      234,
+      77,
+      0,
+      117,
+      0,
+      "STRING"
+    ],
+    [
+      277,
+      144,
+      0,
+      147,
+      0,
+      "LATENT"
+    ],
+    [
+      278,
+      10,
+      2,
+      147,
+      1,
+      "VAE"
+    ],
+    [
+      279,
+      147,
+      0,
+      148,
+      0,
+      "IMAGE"
+    ],
+    [
+      299,
+      156,
+      0,
+      144,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      311,
+      10,
+      0,
+      144,
+      0,
+      "MODEL"
+    ],
+    [
+      313,
+      146,
+      0,
+      144,
+      3,
+      "LATENT"
+    ],
+    [
+      314,
+      42,
+      0,
+      77,
+      1,
+      "IMAGE"
+    ],
+    [
+      316,
+      10,
+      1,
+      156,
+      0,
+      "CLIP"
+    ],
+    [
+      324,
+      77,
+      0,
+      164,
+      1,
+      "STRING"
+    ],
+    [
+      325,
+      164,
+      0,
+      144,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      326,
+      10,
+      1,
+      164,
+      0,
+      "CLIP"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "Prompt",
+      "bounding": [
+        1257,
+        840,
+        808,
+        963
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    },
+    {
+      "title": "n",
+      "bounding": [
+        639,
+        1841,
+        1724,
+        977
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    }
+  ],
+  "config": {},
+  "extra": {
+    "0246.VERSION": [
+      0,
+      0,
+      4
+    ]
+  },
+  "version": 0.4
+}
