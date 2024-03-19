@@ -40,7 +40,7 @@ check_and_install("pycryptodome",import_name="Crypto")
 from .image2text import Image2Text, LoadImage2TextModel, Image2TextWithTags
 from .text2prompt import LoadText2PromptModel,Text2Prompt,Text2GPTPrompt
 from .tools import Translate2Chinese,ShowText,TextBox
-
+from .conditioning import PromptConditioning
 NODE_CLASS_MAPPINGS = {
     "Image2Text": Image2Text,
     "LoadImage2TextModel": LoadImage2TextModel,
@@ -51,6 +51,7 @@ NODE_CLASS_MAPPINGS = {
     "Translate2Chinese|fofo":Translate2Chinese,
     "ShowText|fofo":ShowText,
     "TextBox|fofo":TextBox,
+    "CLIP PromptConditioning|fofo":PromptConditioning
 
 }
 
@@ -63,8 +64,9 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "Text2Prompt":"Text to Prompt 🐼",
     "Text2GPTPrompt":"Multi Text to GPTPrompt 🐼",
     "Translate2Chinese|fofo":"Translate Text to Chinese 🐼",
-    "ShowText|fofo":"ShowText 🐼",
-    "TextBox|fofo":"Text Box 🐼"
+    "ShowText|fofo":"Show Text 🐼",
+    "TextBox|fofo":"Text Box 🐼",
+    "CLIP PromptConditioning|fofo":"CLIP Prompt Conditioning 🐼"
 }
 
 ## model dir
