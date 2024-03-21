@@ -8,12 +8,13 @@ import collections
 import collections.abc
 for type_name in collections.abc.__all__:
     setattr(collections, type_name, getattr(collections.abc, type_name))
-from deepseek_vl.models import VLChatProcessor, MultiModalityCausalLM
+
 
 from huggingface_hub import snapshot_download
 
 class DeepseekVLModel():
     def __init__(self, device="cpu", low_memory=False, model_name="deepseek-vl-7b-chat"):
+        from deepseek_vl.models import VLChatProcessor, MultiModalityCausalLM
         # specify the path to the model
         repo = f"deepseek-ai/{model_name}"
         self.name = f"{model_name}"
