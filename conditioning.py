@@ -2,7 +2,7 @@
 import torch
 import comfy.model_management as model_management
 from copy import deepcopy
-
+from .bnk_adv_encode import advanced_encode
 def maximum_absolute_values(tensors,reversed=False):
     shape = tensors.shape
     tensors = tensors.reshape(shape[0], -1)
@@ -200,7 +200,6 @@ class PromptConditioning:
                 "merge_conditioning_type":(["slerp","average"], {"default": "average"}),
                 "merge_conditioning_strength": ("FLOAT", {"default": 0.5, "min": 0, "max": 1, "step": 0.01}),
                 "merge_conditioning_strength_custom": ("STRING", {"multiline": True} ),
-
                 "sculptor_intensity": ("FLOAT", {"default": 1, "min": 0, "max": 10, "step": 0.1}),
                 "sculptor_method" : (["forward","backward","maximum_absolute"],),
                 "token_normalization": (["none", "mean", "set at 1", "default * attention", "mean * attention", "set at attention", "mean of all tokens"],),
@@ -212,7 +211,17 @@ class PromptConditioning:
     RETURN_TYPES = ("CONDITIONING",)
     CATEGORY = "fofo🐼"
 
-    def exec(self, clip, text,merge_conditioning_type, merge_conditioning_strength,merge_conditioning_strength_custom, sculptor_method, token_normalization, sculptor_intensity):
+    def exec(
+            self, 
+            clip, 
+            text,
+            merge_conditioning_type, 
+            merge_conditioning_strength,
+            merge_conditioning_strength_custom, 
+            sculptor_method, 
+            token_normalization, 
+            sculptor_intensity,
+            ):
         cond_list = []
         prompt_list = []
 
@@ -263,4 +272,23 @@ class PromptConditioning:
                 cond1 = add_to_first_if_shorter(cond1, cond2, x)
         return (cond1,)
 
-    
+class AdvancedCLIPTextEncode:
+    @classmethod
+    def INPUT_TYPES(s):
+        return {"required": {
+            "text": ("STRING", {"multiline": True}),
+            "clip": ("CLIP",),
+            "token_normalization": (["none", "mean", "length", "length+mean"],),
+            "weight_interpretation": (["comfy", "A1111", "compel", "comfy++", "down_weight"],),
+            # "affect_pooled": (["disable", "enable"],),
+        }}
+
+    RETURN_TYPES = ("CONDITIONING",)
+    FUNCTION = "encode"
+
+    CATEGORY = "fofo🐼"
+
+    def encode(self, clip, text, token_normalization, weight_interpretation, affect_pooled='disable'):
+        embeddings_final, pooled = advanced_encode(clip, text, token_normalization, weight_interpretation, w_max=1.0,
+                                                   apply_to_pooled=affect_pooled == 'enable')
+        return ([[embeddings_final, {"pooled_output": pooled}]],)
