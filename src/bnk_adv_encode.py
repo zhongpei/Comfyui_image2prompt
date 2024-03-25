@@ -291,23 +291,3 @@ def advanced_encode_XL(clip, text1, text2, token_normalization, weight_interpret
 
 
 
-class AdvancedCLIPTextEncode:
-    @classmethod
-    def INPUT_TYPES(s):
-        return {"required": {
-            "text": ("STRING", {"multiline": True}),
-            "clip": ("CLIP",),
-            "token_normalization": (["none", "mean", "length", "length+mean"],),
-            "weight_interpretation": (["comfy", "A1111", "compel", "comfy++", "down_weight"],),
-            # "affect_pooled": (["disable", "enable"],),
-        }}
-
-    RETURN_TYPES = ("CONDITIONING",)
-    FUNCTION = "encode"
-
-    CATEGORY = "conditioning/advanced"
-
-    def encode(self, clip, text, token_normalization, weight_interpretation, affect_pooled='disable'):
-        embeddings_final, pooled = advanced_encode(clip, text, token_normalization, weight_interpretation, w_max=1.0,
-                                                   apply_to_pooled=affect_pooled == 'enable')
-        return ([[embeddings_final, {"pooled_output": pooled}]],)

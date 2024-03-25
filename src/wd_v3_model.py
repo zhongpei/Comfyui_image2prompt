@@ -63,7 +63,7 @@ class WdV3Model():
                 return 0.35  # 如果没有找到匹配项，则返回None
             
         threshold=extract_threshold(question)
-        print(f"threshold:{threshold}")
+        #print(f"threshold:{threshold}")
         inputs = self.processor.preprocess(image, return_tensors="pt")
 
         with torch.no_grad():

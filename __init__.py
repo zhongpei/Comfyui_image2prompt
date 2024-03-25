@@ -1,7 +1,10 @@
 
-from .install import check_and_install, check_and_install_version
+from .src.install import check_and_install, check_and_install_version
 
 
+check_and_install("tqdm")
+
+check_and_install("image-reward",import_name="ImageReward")
 
 check_and_install_version("Pillow","10.1.0",import_name="PIL")
 
@@ -37,10 +40,11 @@ check_and_install_version("transformers","4.37.1",up_version=False)
 # youdao Translate
 check_and_install("pycryptodome",import_name="Crypto")
 
-from .image2text import Image2Text, LoadImage2TextModel, Image2TextWithTags
-from .text2prompt import LoadText2PromptModel,Text2Prompt,Text2GPTPrompt
-from .tools import Translate2Chinese,ShowText,TextBox
-from .conditioning import PromptConditioning,AdvancedCLIPTextEncode
+from .src.image2text import Image2Text, LoadImage2TextModel, Image2TextWithTags
+from .src.text2prompt import LoadText2PromptModel,Text2Prompt,Text2GPTPrompt
+from .src.tools import Translate2Chinese,ShowText,TextBox
+from .src.conditioning import PromptConditioning,AdvancedCLIPTextEncode
+from .src.reward import LoadImageRewardScoreModel,ImageRewardScore,ImageBatchToList
 NODE_CLASS_MAPPINGS = {
     "Image2Text": Image2Text,
     "LoadImage2TextModel": LoadImage2TextModel,
@@ -53,6 +57,9 @@ NODE_CLASS_MAPPINGS = {
     "TextBox|fofo":TextBox,
     "CLIP PromptConditioning|fofo":PromptConditioning,
     "CLIP AdvancedTextEncode|fofo":AdvancedCLIPTextEncode,
+    "LoadImageRewardScoreModel|fofo":LoadImageRewardScoreModel,
+    "ImageRewardScore|fofo":ImageRewardScore,
+    "ImageBatchToList|fofo":ImageBatchToList,
 
 }
 
@@ -68,11 +75,14 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "ShowText|fofo":"Show Text 🐼",
     "TextBox|fofo":"Text Box 🐼",
     "CLIP PromptConditioning|fofo":"CLIP Prompt Conditioning 🐼",
-    "CLIP AdvancedTextEncode|fofo": "CLIP Advanced Text Encode 🐼"
+    "CLIP AdvancedTextEncode|fofo": "CLIP Advanced Text Encode 🐼",
+    "LoadImageRewardScoreModel|fofo":"Load Image Reward Score Model 🐼",
+    "ImageRewardScore|fofo":"Image Reward Score 🐼",
+    "ImageBatchToList|fofo":"Image Batch to List 🐼",
 }
 
 ## model dir
-from .install import GLOBAL_MODELS_DIR
+from .src.install import GLOBAL_MODELS_DIR
 import os
 if not os.path.exists(GLOBAL_MODELS_DIR):
     os.makedirs(GLOBAL_MODELS_DIR,exist_ok=True)
