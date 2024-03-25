@@ -7,7 +7,7 @@ from .wd_v3_model import WdV3Model
 from PIL import Image
 import numpy as np
 from .utils import remove_specific_patterns,tensor2pil
-
+from tqdm import tqdm
 GLOBAL_WdV3Model = None
 
 class LoadImage2TextModel:
@@ -34,7 +34,7 @@ class LoadImage2TextModel:
 
     RETURN_TYPES = ("IMAGE2TEXT_MODEL",)
     FUNCTION = "get_model"
-    CATEGORY = "fofo🐼"
+    CATEGORY = "fofo🐼/image2prompt"
 
     def get_model(self, model, device, low_memory):       
             
@@ -81,7 +81,7 @@ class Image2Text:
     OUTPUT_IS_LIST = (True,)
     RETURN_TYPES = ("STRING",)
     FUNCTION = "get_value"
-    CATEGORY = "fofo🐼"
+    CATEGORY = "fofo🐼/image2prompt"
 
     def get_value(self, model, image, query, custom_query, print_log):
         # Ensure custom queries are prioritized
@@ -90,20 +90,22 @@ class Image2Text:
         # Initialize the list of strings to return
         answers = []
         # Iterate over each batch of images
-        for img in image:
-            # Convert Tensor to image
-            
-            img = tensor2pil(img)
-            img = img.convert("RGB")
-            # Additional processing for specific models
-            if model.name == "internlm":
-                query = f"<ImageHere>{query}"
-            
-            result = model.answer_question(img, query)
-            if print_log:
-                print(result)
-            # Call the answer_question method for each batch of images and add to the answers list
-            answers.append(result)
+        with tqdm(total=len(image)) as pbar:
+            for img in image:
+                # Convert Tensor to image
+                
+                img = tensor2pil(img)
+                img = img.convert("RGB")
+                # Additional processing for specific models
+                if model.name == "internlm":
+                    query = f"<ImageHere>{query}"
+                
+                result = model.answer_question(img, query)
+                if print_log:
+                    print(result)
+                # Call the answer_question method for each batch of images and add to the answers list
+                answers.append(result)
+                pbar.update(1)
 
         # Return a list of strings, each corresponding to an answer for a batch
         return (answers,)
@@ -131,7 +133,7 @@ class Image2TextWithTags:
     RETURN_TYPES = ("STRING", "STRING", "STRING")
     RETURN_NAMES = ('FULL PROMPT', "PROMPT", "TAGS")
     FUNCTION = "get_value"
-    CATEGORY = "fofo🐼"
+    CATEGORY = "fofo🐼/image2prompt"
 
     def get_value(self, model, image, query, custom_query, print_log, score,remove_1girl):
         global GLOBAL_WdV3Model
