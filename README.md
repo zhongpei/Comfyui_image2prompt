@@ -1,19 +1,19 @@
-### 基础流程
+### Base(基础流程)
 ![image](workflows/workflow.jpg)
 
-### 7B模型流程
+### 7B model (7B模型流程)
 ![image](workflows/deepseek-vl-7b.png)
 
-### 几种文生图比较
+### Compare model (几种文生图模型比较)
 ![image](workflows/prompt_compare.png)
 
-### 使用图片和文字组合方式
+### Mix Prompt and Image2prompt (使用图片和文字组合方式)
 ![image](workflows/custom_prompt.png)
 
-### Prompt组合
+### Prompt Conditioning (Prompt组合)
 ![image](workflows/prompt_cond.png)
 
-### Reward Images(美学评估)
+### Reward Images (美学评估)
 ![image](workflows/reward_images.png)
 
 ### 介绍
@@ -63,7 +63,7 @@ huggingface-cli download --resume-download unum-cloud/uform-gen2-qwen-500m --loc
 
 按照这些步骤操作，您将确保插件能够访问所需的模型，从而准确地将图片转换为提示，增强您的ComfyUI体验。
 
-
+# English
 
 
 - We adopted the `wd-swinv2-tagger-v3` model, which significantly enhanced the accuracy of character trait descriptions, making it particularly suitable for scenarios requiring detailed depiction of characters.
