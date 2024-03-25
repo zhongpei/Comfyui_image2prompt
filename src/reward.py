@@ -19,17 +19,30 @@ from .utils import tensor2pil
 class ImageBatchToList:
     @classmethod
     def INPUT_TYPES(s):
-        return {"required": {"image_batch": ("IMAGE",), }}
+        return {
+            "required": {"image_batch1": ("IMAGE",), },
+            "optional":{
+                "image_batch2": ("IMAGE",), 
+                "image_batch3": ("IMAGE",), 
+                "image_batch4": ("IMAGE",), 
+            }
+        }
 
     RETURN_TYPES = ("IMAGE",)
     RETURN_NAMES = ("IMAGES",)
     OUTPUT_IS_LIST = (True,)
     FUNCTION = "run"
 
-    CATEGORY = "fofo/Image"
+    CATEGORY = "fofo🐼/image"
 
-    def run(self, image_batch):
-        images = [image_batch[i:i + 1, ...] for i in range(image_batch.shape[0])]
+    def run(self, image_batch1,image_batch2=None,image_batch3=None,image_batch4=None):
+        images = [image_batch1[i:i + 1, ...] for i in range(image_batch1.shape[0])]
+        if image_batch2 is not None:
+            images += [image_batch2[i:i + 1, ...] for i in range(image_batch2.shape[0])]
+        if image_batch3 is not None:
+            images += [image_batch3[i:i + 1, ...] for i in range(image_batch3.shape[0])]
+        if image_batch4 is not None:
+            images += [image_batch4[i:i + 1, ...] for i in range(image_batch4.shape[0])]
         return (images, )
     
 class LoadImageRewardScoreModel:
@@ -45,7 +58,7 @@ class LoadImageRewardScoreModel:
     RETURN_TYPES = ("IMAGEREWARD_MODEL",)
     RETURN_NAMES = ("IMAGEREWARD_MODEL",)
     OUTPUT_NODE = True
-    CATEGORY = "fofo"
+    CATEGORY = "fofo🐼/image"
     FUNCTION = "load_model"
 
     def load_model(self, device):       
@@ -85,7 +98,7 @@ class ImageRewardScore:
     RETURN_TYPES = ("IMAGE","STRING","INT")
     RETURN_NAMES = ("IMAGES","SCORES_STR","SCORES_INT")
     OUTPUT_NODE = True
-    CATEGORY = "fofo"
+    CATEGORY = "fofo🐼/image"
     FUNCTION = "reward"
 
     INPUT_IS_LIST = True
@@ -98,7 +111,7 @@ class ImageRewardScore:
         model = model[0]
         top_k = top_k[0]
         prompt = prompt[0]
-        
+
         scores = []
         print(f"image count: {len(images)}")
 

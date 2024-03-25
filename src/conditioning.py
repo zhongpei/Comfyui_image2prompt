@@ -201,7 +201,7 @@ class PromptConditioning:
                 "merge_conditioning_strength": ("FLOAT", {"default": 0.5, "min": 0, "max": 1, "step": 0.01}),
                 "merge_conditioning_strength_custom": ("STRING", {"multiline": True} ),
                 "sculptor_intensity": ("FLOAT", {"default": 1, "min": 0, "max": 10, "step": 0.1}),
-                "sculptor_method" : (["forward","backward","maximum_absolute"],),
+                "sculptor_method" : (["forward","backward","maximum_absolute"],{"default":"backward"}),
                 "token_normalization": (["none", "mean", "set at 1", "default * attention", "mean * attention", "set at attention", "mean of all tokens"],),
  
             }
@@ -209,7 +209,7 @@ class PromptConditioning:
 
     FUNCTION = "exec"
     RETURN_TYPES = ("CONDITIONING",)
-    CATEGORY = "fofo🐼"
+    CATEGORY = "fofo🐼/conditioning"
 
     def exec(
             self, 
@@ -286,7 +286,7 @@ class AdvancedCLIPTextEncode:
     RETURN_TYPES = ("CONDITIONING",)
     FUNCTION = "encode"
 
-    CATEGORY = "fofo🐼"
+    CATEGORY = "fofo🐼/conditioning"
 
     def encode(self, clip, text, token_normalization, weight_interpretation, affect_pooled='disable'):
         embeddings_final, pooled = advanced_encode(clip, text, token_normalization, weight_interpretation, w_max=1.0,

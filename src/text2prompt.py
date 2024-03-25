@@ -22,7 +22,7 @@ class LoadText2PromptModel:
 
     RETURN_TYPES = ("TEXT2PROMPT_MODEL",)
     FUNCTION = "get_model"
-    CATEGORY = "fofo🐼"
+    CATEGORY = "fofo🐼/prompt"
 
     def get_model(self, model, device, low_memory):     
             
@@ -84,7 +84,7 @@ class Text2Prompt:
 
     RETURN_TYPES = ("STRING",)
     FUNCTION = "generate_text"
-    CATEGORY = "fofo🐼"
+    CATEGORY = "fofo🐼/prompt"
 
     def generate_text(
             self,
@@ -139,7 +139,7 @@ class Text2GPTPrompt:
     
     RETURN_TYPES = ("STRING",)
     FUNCTION = "generate_text"
-    CATEGORY = "fofo🐼"
+    CATEGORY = "fofo🐼/prompt"
 
     def generate_text(self, prompt,text1,text2,text1_perfix,text2_perfix,print_output):
         text1 = f"{text1_perfix}{text1}"
