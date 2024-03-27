@@ -45,6 +45,8 @@ from .src.text2prompt import LoadText2PromptModel,Text2Prompt,Text2GPTPrompt
 from .src.tools import Translate2Chinese,ShowText,TextBox
 from .src.conditioning import PromptConditioning,AdvancedCLIPTextEncode
 from .src.reward import LoadImageRewardScoreModel,ImageRewardScore,ImageBatchToList
+from .src.t5_gpt import T5_LLM_Node,QuantizationConfig_Node,Load_T5_LLM_Model
+
 NODE_CLASS_MAPPINGS = {
     "Image2Text": Image2Text,
     "LoadImage2TextModel": LoadImage2TextModel,
@@ -60,6 +62,9 @@ NODE_CLASS_MAPPINGS = {
     "LoadImageRewardScoreModel|fofo":LoadImageRewardScoreModel,
     "ImageRewardScore|fofo":ImageRewardScore,
     "ImageBatchToList|fofo":ImageBatchToList,
+    "LoadT5Model|fofo": Load_T5_LLM_Model,
+    "T5QuantizationConfig|fofo": QuantizationConfig_Node,
+    "T5Text2Prompt|fofo": T5_LLM_Node,
 
 }
 
@@ -79,6 +84,9 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "LoadImageRewardScoreModel|fofo":"Load Image Reward Score Model 🐼",
     "ImageRewardScore|fofo":"Image Reward Score 🐼",
     "ImageBatchToList|fofo":"Image Batch to List 🐼",
+    "LoadT5Model|fofo": "Load T5 Model 🐼",
+    "T5QuantizationConfig|fofo": "T5 Quantization Config 🐼",
+    "T5Text2Prompt|fofo": "T5 Text to Prompt 🐼",
 }
 
 ## model dir

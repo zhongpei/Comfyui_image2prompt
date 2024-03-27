@@ -73,3 +73,13 @@ def is_bf16_supported():
     return False
 
 
+def download_model(repo:str)->str:
+    from .install import get_model_dir
+    from huggingface_hub import snapshot_download
+    local_dir = get_model_dir("{}".format(repo.replace("/","__")))
+    
+    if os.path.exists(local_dir):
+        model_path = local_dir
+    else:
+        model_path = snapshot_download(repo, local_dir=local_dir)
+    return model_path

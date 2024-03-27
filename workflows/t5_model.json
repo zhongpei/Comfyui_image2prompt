@@ -1,0 +1,160 @@
+{
+  "last_node_id": 7,
+  "last_link_id": 6,
+  "nodes": [
+    {
+      "id": 7,
+      "type": "T5Text2Prompt|fofo",
+      "pos": [
+        1041,
+        209
+      ],
+      "size": {
+        "0": 400,
+        "1": 244
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "T5_MODEL",
+          "link": 5
+        }
+      ],
+      "outputs": [
+        {
+          "name": "string",
+          "type": "STRING",
+          "links": [
+            6
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "T5Text2Prompt|fofo"
+      },
+      "widgets_values": [
+        "Expand the following prompt to add more detail: A storefront with 'Text to Image' written on it.",
+        27,
+        "randomize",
+        256,
+        1,
+        0.9,
+        50,
+        1.2
+      ]
+    },
+    {
+      "id": 5,
+      "type": "LoadT5Model|fofo",
+      "pos": [
+        684,
+        205
+      ],
+      "size": {
+        "0": 342.5999755859375,
+        "1": 82
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "quantizationConfig",
+          "type": "QUANTIZATIONCONFIG",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "T5_MODEL",
+          "type": "T5_MODEL",
+          "links": [
+            5
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadT5Model|fofo"
+      },
+      "widgets_values": [
+        "roborovski/superprompt-v1",
+        "cuda"
+      ]
+    },
+    {
+      "id": 6,
+      "type": "ShowText|fofo",
+      "pos": [
+        1456,
+        206
+      ],
+      "size": [
+        364,
+        242
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 6,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|fofo"
+      },
+      "widgets_values": [
+        "",
+        "The storefront of a sleek, modern building is decorated with vibrant colors and intricate details. The words \"Text to Image\" are written in bold, cursive letters across the front, inviting passersby to explore the latest technology and products. The storefront is surrounded by a bustling cityscape, with skyscrapers and neon signs illuminating the space. The air is thick with the scent of freshly baked bread and fresh produce, and the sound of chatter and laughter fills the air."
+      ]
+    }
+  ],
+  "links": [
+    [
+      5,
+      5,
+      0,
+      7,
+      0,
+      "T5_MODEL"
+    ],
+    [
+      6,
+      7,
+      0,
+      6,
+      0,
+      "STRING"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "0246.VERSION": [
+      0,
+      0,
+      4
+    ]
+  },
+  "version": 0.4
+}
