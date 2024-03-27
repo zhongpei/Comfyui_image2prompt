@@ -18,7 +18,7 @@ class Translate2Chinese:
     
     RETURN_TYPES = ("STRING",)
     FUNCTION = "generate_text"
-    CATEGORY = "fofo🐼"
+    CATEGORY = "fofo🐼/tools"
 
     def generate_text(self, text, print_output,cache):
 
@@ -59,7 +59,7 @@ class ShowText:
     OUTPUT_NODE = True
     OUTPUT_IS_LIST = (True,)
 
-    CATEGORY = "fofo🐼"
+    CATEGORY = "fofo🐼/tools"
 
     def notify(self, text, unique_id=None, extra_pnginfo=None):
         if unique_id is not None and extra_pnginfo is not None:
@@ -99,7 +99,7 @@ class TextBox:
 
     RETURN_TYPES = ("STRING",)
     FUNCTION = "get_value"
-    CATEGORY = "fofo🐼"
+    CATEGORY = "fofo🐼/tools"
 
     def get_value(self, Text):
         return (Text,)
