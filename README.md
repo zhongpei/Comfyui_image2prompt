@@ -25,6 +25,7 @@
 - 利用`hahahafofo/Qwen-1_8B-Stable-Diffusion-Prompt`模型，我们能够充分发挥Qwen的潜力，特别是在生成包括古诗词在内的各式提示语时展现卓越性能。此模型经过35000条数据的特定任务微调(SFT)，不仅性价比高，而且在CPU上运行的速度也相当可观。
 - Prompt组合方式生成Conditioning （code modify from https://github.com/Extraltodeus/Vector_Sculptor_ComfyUI）
 - Reward Images (美学评估)(https://github.com/THUDM/ImageReward)
+- 支持 [roborovski/superprompt-v1](https://huggingface.co/roborovski/superprompt-v1) 等T5模型
 
 
 
@@ -72,6 +73,7 @@ huggingface-cli download --resume-download unum-cloud/uform-gen2-qwen-500m --loc
 - Utilizing the `hahahafofo/Qwen-1_8B-Stable-Diffusion-Prompt` model, we can fully leverage the potential of Qwen, especially in generating various forms of prompts, including classical poetry. This model, fine-tuned with 35,000 pieces of data for specific tasks (SFT), not only offers a high cost-performance ratio but also runs at a considerable speed on CPUs.
 - Generating Conditioning through Prompt Combination （code modify from https://github.com/Extraltodeus/Vector_Sculptor_ComfyUI）
 - Reward Images (https://github.com/THUDM/ImageReward)
+- Support T5 models such as [roborovski/superprompt-v1](https://huggingface.co/roborovski/superprompt-v1)
 
 ### Step 1: Install the Plugin
 
