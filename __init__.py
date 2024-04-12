@@ -1,44 +1,68 @@
-
 from .src.install import check_and_install, check_and_install_version
+import os
 
 
-check_and_install("tqdm")
+def should_skip_install():
+    """
+    从环境变量中读取 COMFYUI_IMAGE2PROMPT_SKIP_INSTALL 的值。
+    支持多种表示跳过安装的字符串。
 
-check_and_install("image-reward",import_name="ImageReward")
+    返回:
+    bool: 如果环境变量的值表示跳过安装，则返回 True；否则返回 False。
+    """
+    # 定义一个集合，包含所有表示跳过安装的值
+    skip_values = {"TRUE", "YES", "1", "SKIP", "Y"}
 
-check_and_install_version("Pillow","10.1.0",import_name="PIL")
+    # 读取环境变量的值，如果未设置则默认为 "False"
+    env_value = os.getenv("COMFYUI_IMAGE2PROMPT_SKIP_INSTALL", "False").upper()
 
-check_and_install_version("huggingface_hub","0.20.1")
-
-# 4bit internlm 
-# linux must install manually for kernel compile
-check_and_install_version("auto-gptq","0.7.1",import_name="auto_gptq")
+    # 判断环境变量的值是否在 skip_values 集合中
+    return env_value in skip_values
 
 
-check_and_install_version("einops","0.7.0")
-check_and_install("torchvision")
-check_and_install_version("accelerate","0.25.0")
-check_and_install_version("timm","0.9.16")
+if not should_skip_install():
 
-# Qwen-1.5 awq
-check_and_install_version("autoawq","0.2.3",import_name="awq")
+    check_and_install("tqdm")
 
-## Qwen1_8 Prompt
-check_and_install("tiktoken")
-# check_and_install_version("transformers-stream-generator", "0.0.4",import_name="transformers_stream_generator")
+    check_and_install("image-reward", import_name="ImageReward")
 
-# deepseek
-check_and_install("attrdict")
-check_and_install_version("einops","0.7.0")
-check_and_install_version("sentencepiece","0.2.0")
-check_and_install("git+https://github.com/deepseek-ai/DeepSeek-VL.git@86a3096",import_name="deepseek_vl")
+    check_and_install_version("Pillow", "10.1.0", import_name="PIL")
 
-# >= 4.37.1 Qwen-1.5      
-# >= 4.38.2 deepseek , test ok == 4.37.1
-check_and_install_version("transformers","4.37.1",up_version=False)
+    check_and_install_version("huggingface_hub", "0.20.1")
 
-# youdao Translate
-check_and_install("pycryptodome",import_name="Crypto")
+    # 4bit internlm
+    # linux must install manually for kernel compile
+    check_and_install_version("auto-gptq", "0.7.1", import_name="auto_gptq")
+
+    check_and_install_version("einops", "0.7.0")
+    check_and_install("torchvision")
+    check_and_install_version("accelerate", "0.25.0")
+    check_and_install_version("timm", "0.9.16")
+
+    # Qwen-1.5 awq
+    check_and_install_version("autoawq", "0.2.3", import_name="awq")
+
+    ## Qwen1_8 Prompt
+    check_and_install("tiktoken")
+    # check_and_install_version("transformers-stream-generator", "0.0.4",import_name="transformers_stream_generator")
+
+    # deepseek
+    check_and_install("attrdict")
+    check_and_install_version("einops", "0.7.0")
+    check_and_install_version("sentencepiece", "0.2.0")
+    check_and_install(
+        "git+https://github.com/deepseek-ai/DeepSeek-VL.git@86a3096",
+        import_name="deepseek_vl",
+    )
+
+    # >= 4.37.1 Qwen-1.5
+    # >= 4.38.2 deepseek , test ok == 4.37.1
+    # check_and_install_version("transformers","4.37.1",up_version=False)
+
+    # youdao Translate
+    check_and_install("pycryptodome", import_name="Crypto")
+else:
+    print("通过设置环境变量跳过Comfyui_image2prompt安装依赖项步骤")
 
 from .src.image2text import Image2Text, LoadImage2TextModel, Image2TextWithTags
 from .src.text2prompt import LoadText2PromptModel,Text2Prompt,Text2GPTPrompt
@@ -65,7 +89,6 @@ NODE_CLASS_MAPPINGS = {
     "LoadT5Model|fofo": Load_T5_LLM_Model,
     "T5QuantizationConfig|fofo": QuantizationConfig_Node,
     "T5Text2Prompt|fofo": T5_LLM_Node,
-
 }
 
 # A dictionary that contains the friendly/humanly readable titles for the nodes
