@@ -4,6 +4,7 @@ from .internlm_model import InternlmVLModle
 from .uform_qwen_model import UformQwenModel
 from .deepseek_model import DeepseekVLModel
 from .wd_v3_model import WdV3Model
+from .llama3_model import Llama3vModel
 from PIL import Image
 import numpy as np
 from .utils import remove_specific_patterns,tensor2pil
@@ -20,12 +21,13 @@ class LoadImage2TextModel:
                 "model": ([
                     "moondream1",
                     "moondream2", 
+                    "bunny-llama3-8b-v",
                     "internlm-xcomposer2-vl-7b", 
                     "uform-qwen",
                     "wd-swinv2-tagger-v3",
                     "deepseek-vl-1.3b-chat",
-                    "deepseek-vl-7b-chat",
-                    ], {"default": "moondream1"}),
+                    "deepseek-vl-7b-chat",                    
+                    ], {"default": "moondream2"}),
                 "device": (["cpu", "cuda", ], {"default": "cuda"}),
                 "low_memory": ("BOOLEAN", {"default": False}),
             }
@@ -48,6 +50,8 @@ class LoadImage2TextModel:
             return (WdV3Model(device=device,low_memory=low_memory),)
         elif model == "deepseek-vl-1.3b-chat" or model == "deepseek-vl-7b-chat":
             return (DeepseekVLModel(device=device,low_memory=low_memory,model_name=model), )
+        elif model == "bunny-llama3-8b-v":
+            return (Llama3vModel(device=device,low_memory=low_memory),)
         
         return (MoondreamModel(device=device,low_memory=low_memory),)
     
