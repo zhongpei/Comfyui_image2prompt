@@ -36,8 +36,10 @@ class Llama3vModel():
             model_path = snapshot_download(repo, local_dir=local_dir)
 
         
-        kwargs={}
-        kwargs['load_in_8bit'] = True
+        kwargs = {"device_map": "auto"}
+
+
+        
         if low_memory:
             kwargs['load_in_4bit'] = True
             kwargs['quantization_config'] = BitsAndBytesConfig(
@@ -46,6 +48,8 @@ class Llama3vModel():
                 bnb_4bit_use_double_quant=True,
                 bnb_4bit_quant_type='nf4'
             )
+        #else:
+        #    kwargs['load_in_8bit'] = True
             
         if torch.cuda.is_available():
             #if is_bf16_supported:
@@ -56,7 +60,8 @@ class Llama3vModel():
             device, dtype = "cpu", torch.float32
         
         self.device = device
-
+        if device != "cuda":
+            kwargs['device_map'] = {"": device}
         self.tokenizer = AutoTokenizer.from_pretrained(model_path, trust_remote_code=True )
         if torch.cuda.is_available() and device == "cuda":
             self.model = AutoModelForCausalLM.from_pretrained(                
@@ -64,8 +69,8 @@ class Llama3vModel():
                 torch_dtype=dtype, 
                 trust_remote_code=True,              
                 max_length=1024,
-
-            ).to(device).eval()
+                **kwargs
+            ).eval()
 
             
         else:
@@ -75,7 +80,7 @@ class Llama3vModel():
                 trust_remote_code=True,
                 max_length=1024,
 
-            ).to(device).float().eval()
+            ).float().eval()
         
         print(f"{repo} loaded on {device}. dtype {dtype}")
         
