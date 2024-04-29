@@ -43,7 +43,7 @@ git clone https://github.com/zhongpei/Comfyui-image2prompt
 
 ### 第2步：下载模型
 
-模型在第一次运行时候会自动下载，如果没有正常下载，为了使插件正常工作，您需要下载必要的模型。该插件使用来自Hugging Face的 `vikhyatk/moondream1` `vikhyatk/moondream2` `unum-cloud/uform-gen2-qwen-500m` 和 `internlm/internlm-xcomposer2-vl-7b` 模型。
+模型在第一次运行时候会自动下载，如果没有正常下载，为了使插件正常工作，您需要下载必要的模型。该插件使用来自Hugging Face的 `vikhyatk/moondream1` `vikhyatk/moondream2` `BAAI/Bunny-Llama-3-8B-V` `unum-cloud/uform-gen2-qwen-500m` 和 `internlm/internlm-xcomposer2-vl-7b` 模型。
 确保您已将这些模型下载到插件的 `ComfyUI/models/image2text` 目录中。使用以下链接进行下载：
 
 * [下载moondream1模型](https://huggingface.co/vikhyatk/moondream1)
