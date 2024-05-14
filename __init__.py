@@ -39,8 +39,14 @@ if not should_skip_install():
     check_and_install_version("accelerate", "0.25.0")
     check_and_install_version("timm", "0.9.16")
 
-    # Qwen-1.5 awq
-    check_and_install_version("autoawq", "0.2.3", import_name="awq")
+    # >= 4.37.1 Qwen-1.5      
+    # >= 4.38.2 deepseek , test ok == 4.37.1
+    # >= 4.38.2 llama3
+    check_and_install_version("transformers","4.38.2",up_version=False)
+
+    # llama3 4bit or 8bit
+    check_and_install_version("accelerate","0.29.3")
+    check_and_install_version("bitsandbytes","0.43.1")
 
     ## Qwen1_8 Prompt
     check_and_install("tiktoken")
