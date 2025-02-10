@@ -80,7 +80,7 @@ huggingface-cli download --resume-download unum-cloud/uform-gen2-qwen-500m --loc
 To integrate the Image-to-Prompt feature with ComfyUI, start by cloning the repository of the plugin into your ComfyUI `custom_nodes` directory. Use the following command to clone the repository:
 
 ```bash
-git clone https://github.com/zhongpei/Comfyui-image2prompt
+git clone https://github.com/zhongpei/Comfyui_image2prompt
 ```
 
 This step is crucial for enabling the plugin within the ComfyUI environment, facilitating the efficient transformation of images into descriptive prompts.
