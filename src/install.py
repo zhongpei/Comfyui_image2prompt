@@ -39,7 +39,7 @@ def check_and_install_version(package_name, required_version, up_version=True, i
         else:
             print(f"{package_name}的当前版本{installed_version}低于要求的{required_version}，将尝试安装。")
     except ImportError:
-        print(f"{package_name}未安装，将尝试安装{required_version}版本。")
+        print(f"import {import_name}, {package_name}未安装，将尝试安装{required_version}版本。")
     except AttributeError:
         print(f"无法确定{package_name}的版本，将尝试安装{required_version}版本。")
 

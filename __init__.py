@@ -4,11 +4,11 @@ from .src.install import check_and_install, check_and_install_version
 
 check_and_install("tqdm")
 
-check_and_install("image-reward",import_name="ImageReward")
+check_and_install_version("huggingface_hub","0.21.0",up_version=False)
+check_and_install_version("diffusers","0.26.0",import_name="diffusers")
+check_and_install("git+https://github.com/THUDM/ImageReward",import_name="ImageReward")
 
 check_and_install_version("Pillow","10.1.0",import_name="PIL")
-
-check_and_install_version("huggingface_hub","0.20.1")
 
 # 4bit internlm 
 # linux must install manually for kernel compile
