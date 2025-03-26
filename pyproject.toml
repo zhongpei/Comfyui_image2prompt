@@ -1,0 +1,14 @@
+[project]
+name = "comfyui_image2prompt"
+description = "Nodes:Image to Text, Loader Image to Text Model."
+version = "1.0.0"
+license = "LICENSE"
+
+[project.urls]
+Repository = "https://github.com/zhongpei/Comfyui_image2prompt"
+#  Used by Comfy Registry https://comfyregistry.org
+
+[tool.comfy]
+PublisherId = ""
+DisplayName = "Comfyui_image2prompt"
+Icon = ""
