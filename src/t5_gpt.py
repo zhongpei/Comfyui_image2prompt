@@ -51,7 +51,7 @@ class Load_T5_LLM_Model():
         model_path = download_model(model)
 
         if torch.cuda.is_available():
-            if is_bf16_supported:
+            if is_bf16_supported():
                 device, dtype = "cuda", torch.bfloat16
             else:
                 device, dtype = "cuda", torch.float16
